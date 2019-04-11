@@ -1,0 +1,4 @@
+﻿  namenum.cpp
+c:\users\alina_000\documents\visual studio 2017\projects\usacopractice\ch1_namenum\namenum.cpp(107): warning C4018: '<': signed/unsigned mismatch
+c:\users\alina_000\documents\visual studio 2017\projects\usacopractice\ch1_namenum\namenum.cpp(117): warning C4018: '<': signed/unsigned mismatch
+  Ch1_namenum.vcxproj -> C:\Users\alina_000\Documents\Visual Studio 2017\Projects\USACOPractice\Debug\Ch1_namenum.exe

@@ -1,0 +1,19 @@
+public static void main(String[] args)
+    {
+	BufferedReader f = null;
+	PrintWriter out = null;
+
+	try
+	{
+	    f = new BufferedReader(new FileReader("gift1.in"));
+	    out = new PrintWriter(new BufferedWriter(new FileWriter("gift1.out")));
+		
+		// USE STRING TOKENIZER IF NEED TO SPLIT LINE
+	} catch (IOException e)
+	{
+	    e.printStackTrace();
+	}
+
+	out.close();
+
+    }

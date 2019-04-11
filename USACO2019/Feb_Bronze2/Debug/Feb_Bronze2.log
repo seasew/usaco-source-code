@@ -1,0 +1,3 @@
+﻿  revegetate.cpp
+c:\users\alina_000\documents\visual studio 2017\projects\usaco2019\feb_bronze2\revegetate.cpp(46): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  Feb_Bronze2.vcxproj -> C:\Users\alina_000\Documents\Visual Studio 2017\Projects\USACO2019\Debug\Feb_Bronze2.exe
