@@ -46,12 +46,14 @@ int main()
 	int x = 0;
 	for (int i = 0; i < 1000; i++)
 	{
-		for (int j = 0; j < 1000; j++)
+		for (int j = 1; j < 1000; j++)
 		{
 			if (barn[i][j] == k)
 			{
 				x++;
 			}
+
+			barn[i][j] += barn[i][j - 1];
 		}
 	}
 
