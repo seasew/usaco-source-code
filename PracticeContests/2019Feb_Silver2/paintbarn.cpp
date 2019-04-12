@@ -10,7 +10,7 @@ PROB: paintbarn
 #include <algorithm>
 #include <iterator>
 
-int barn[10][10];
+int barn[11][11];
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
 		for (int a = x1; a <= x2; a++)
 		{
 			barn[a][y1]++;
-			barn[a][y2]--;
+			barn[a][y2 + 1]--;
 		}
 	}
 
