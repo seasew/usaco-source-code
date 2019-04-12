@@ -36,10 +36,10 @@ int main()
 	{
 		int x1, y1, x2, y2;
 		fin >> x1 >> y1 >> x2 >> y2;
-		for (int a = y1; a < y2; a++)
+		for (int a = x1; a < x2; a++)
 		{
-			barn[x1][a]++;
-			barn[x2][a]--;
+			barn[a][y1]++;
+			barn[a][y2]--;
 		}
 	}
 
