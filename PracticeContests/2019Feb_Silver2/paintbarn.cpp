@@ -10,7 +10,7 @@ PROB: paintbarn
 #include <algorithm>
 #include <iterator>
 
-int barn[1000][1001];
+int barn[1000][1000];
 
 int main()
 {
@@ -46,7 +46,7 @@ int main()
 	int x = 0;
 	for (int i = 0; i < 1000; i++)
 	{
-		for (int j = 0; j < 1001; j++)
+		for (int j = 0; j < 1000; j++)
 		{
 			// if i is not zero
 			if (i > 0)
