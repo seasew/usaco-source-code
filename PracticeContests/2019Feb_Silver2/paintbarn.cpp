@@ -51,7 +51,7 @@ int main()
 			x++;
 		}
 
-		for (int j = 1; j < 10; j++)
+		for (int j = 1; j < 1001; j++)
 		{
 
 			barn[i][j] += barn[i][j - 1];
