@@ -36,30 +36,39 @@ int main()
 	{
 		int x1, y1, x2, y2;
 		fin >> x1 >> y1 >> x2 >> y2;
-		for (int a = x1; a < x2; a++)
-		{
-			barn[a][y1]++;
-			barn[a][y2]--;
-		}
+		
+			barn[x1][y1]++;
+			barn[x2][y1]++;
+			barn[x1][y2]--;
+			barn[x2][y2]--;
 	}
 
 	int x = 0;
 	for (int i = 0; i < 1000; i++)
 	{
-		if (barn[i][0] == k)
+		for (int j = 0; j < 1001; j++)
 		{
-			x++;
-		}
+			// if i is not zero
+			if (i > 0)
+			{
+				barn[i][j] += barn[i - 1][j];
+			}
+			// if j is not zero
+			if (j > 0)
+			{
+				barn[i][j] += barn[i][j - 1];
+			}
+			// if both are not zero
+			if (i > 0 && j > 0)
+			{
+				barn[i][j] -= barn[i - 1][j - 1];
+			}
 
-		for (int j = 1; j < 1001; j++)
-		{
-
-			barn[i][j] += barn[i][j - 1];
+			// check
 			if (barn[i][j] == k)
 			{
 				x++;
 			}
-
 		}
 	}
 
