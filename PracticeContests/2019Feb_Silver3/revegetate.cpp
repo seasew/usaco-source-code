@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 using namespace std;
 
 int N, M, answer;
@@ -28,8 +29,7 @@ int main(void)
 	for (int i = 0; i < M; i++) {
 		int a, b;
 		string s;
-		s = fin.get();
-		fin >> a >> b;
+		fin >> s >> a >> b;
 		if (s == "S") { S_nbrs[a].push_back(b); S_nbrs[b].push_back(a); }
 		if (s == "D") { D_nbrs[a].push_back(b); D_nbrs[b].push_back(a); }
 	}
@@ -39,15 +39,10 @@ int main(void)
 
 	ofstream fout("revegetate.out");
 	if (impossible) fout << "0\n";
-
-
 	else {
 		fout << "1";
 		for (int i = 0; i < answer; i++) fout << "0";
 		fout << "\n";
 	}
-
-
-	fout << answer;
 	return 0;
 }
