@@ -14,14 +14,15 @@ PROB: revegetate
 
 int n;
 int m;
+int k;
 // if cannot find a solution
 bool impossible;
 // an array of arrays refering to each pastures' same pastures
-std::vector<int> same[1000000];
+std::vector<int> same[1000001];
 // an array of arrays referring to each pastures' different pastures
-std::vector<int> diff[100000];
+std::vector<int> diff[100001];
 // values of 0 if not visted yet, 1 or 2
-int pastures[100000];
+int pastures[100001];
 
 int main()
 {
@@ -50,14 +51,32 @@ int main()
 		if (c == 'S')
 		{
 			// add the respective pastures to same array
-			same[p1 - 1].push_back(p2);
-			same[p2 - 1].push_back(p1);
+			same[p1].push_back(p2);
+			same[p2].push_back(p1);
 		}
 		else
 		{
-			diff[p1 - 1].push_back(p2);
-			diff[p2 - 1].push_back(p1);
+			// diff array
+			diff[p1].push_back(p2);
+			diff[p2].push_back(p1);
 		}
+	}
+
+	// for each pasture that hasn't been visited
+	for (int i = 1; i <= n; i++)
+	{
+		if (!pastures[i])
+		{
+			// visit pasture 1 with grass1
+			visit(i, 1);
+			k++;
+		}
+	}
+
+	// if any part of the solution was marked impossible
+	if (impossible)
+	{
+		fout << "0\n";
 	}
 
 	// Write to File
