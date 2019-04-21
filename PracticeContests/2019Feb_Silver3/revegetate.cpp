@@ -38,6 +38,7 @@ void visit(int p, int v)
 			if (pastures[sameP] != v)
 			{
 				impossible = true;
+				return;
 			}
 		}
 		// if has not been visited
@@ -57,6 +58,7 @@ void visit(int p, int v)
 			if (pastures[diffP] == v)
 			{
 				impossible = true;
+				return;
 			}
 		}
 		// if has not been visted
