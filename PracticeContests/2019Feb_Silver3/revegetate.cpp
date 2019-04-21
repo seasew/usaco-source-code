@@ -29,7 +29,7 @@ void visit(int p, int v)
 {
 	pastures[p] = v;
 	// for each same pasture
-	for (auto same : same[p])
+	for (int same : same[p])
 	{
 		// if it has already been visited
 		if (pastures[same])
@@ -48,7 +48,7 @@ void visit(int p, int v)
 	}
 
 	// for each different pasture
-	for (auto diff : diff[p])
+	for (int diff : diff[p])
 	{
 		// if it has already been visited
 		if (pastures[diff])
