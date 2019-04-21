@@ -29,13 +29,13 @@ void visit(int p, int v)
 {
 	pastures[p] = v;
 	// for each same pasture
-	for (int same : same[p])
+	for (int sameP : same[p])
 	{
 		// if it has already been visited
-		if (pastures[same])
+		if (pastures[sameP])
 		{
 			// check for consistency
-			if (pastures[same] != v)
+			if (pastures[sameP] != v)
 			{
 				impossible = true;
 			}
@@ -43,18 +43,18 @@ void visit(int p, int v)
 		// if has not been visited
 		else
 		{
-			visit(same, v);
+			visit(sameP, v);
 		}
 	}
 
 	// for each different pasture
-	for (int diff : diff[p])
+	for (int diffP : diff[p])
 	{
 		// if it has already been visited
-		if (pastures[diff])
+		if (pastures[diffP])
 		{
 			// check for consistency
-			if (pastures[diff] == v)
+			if (pastures[diffP] == v)
 			{
 				impossible = true;
 			}
@@ -63,7 +63,7 @@ void visit(int p, int v)
 		else
 		{
 			// visit it
-			visit(diff, 3 - v);
+			visit(diffP, 3 - v);
 		}
 	}
 }
