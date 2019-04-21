@@ -24,6 +24,50 @@ std::vector<int> diff[100001];
 // values of 0 if not visted yet, 1 or 2
 int pastures[100001];
 
+// visits the pasture with the value
+void visit(int p, int v)
+{
+	pastures[p] = v;
+	// for each same pasture
+	for (auto same : same[p])
+	{
+		// if it has already been visited
+		if (pastures[same])
+		{
+			// check for consistency
+			if (pastures[same] != v)
+			{
+				impossible = true;
+			}
+		}
+		// if has not been visited
+		else
+		{
+			visit(same, v);
+		}
+	}
+
+	// for each different pasture
+	for (auto diff : diff[p])
+	{
+		// if it has already been visited
+		if (pastures[diff])
+		{
+			// check for consistency
+			if (pastures[diff] == v)
+			{
+				impossible = true;
+			}
+		}
+		// if has not been visted
+		else
+		{
+			// visit it
+			visit(diff, 3 - v);
+		}
+	}
+}
+
 int main()
 {
 	// Open Streams
@@ -78,9 +122,15 @@ int main()
 	{
 		fout << "0\n";
 	}
-
-	// Write to File
-	fout << "";
+	else
+	{
+		fout << "1";
+		for (int i = 0; i < k; i++)
+		{
+			fout << "0";
+		}
+		fout << "\n";
+	}
 
 	// Close Streams
 	fin.close();
