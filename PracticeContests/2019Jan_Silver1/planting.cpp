@@ -14,8 +14,27 @@ PROB: planting
 int n;
 std::vector<int> adjacent[100001];
 std::vector<int> nearAdjacent[100001];
-int fields[100001];
-bool grass[100001];
+int fieldArr[100001];
+bool grassArr[100001];
+
+int maxgrass;
+
+void plant(int field, int grass)
+{
+	// both parameters are 1 based
+	// update fields array
+	fieldArr[field] = grass;
+	grassArr[grass] = true;
+
+	// find adjacent fields that have not been planted yet
+	for (int adjacentF : adjacent[field])
+	{
+		//if ()
+	}
+
+	// update grassmax
+	//maxgrass = std::max(maxgrass, );
+}
 
 int main()
 {
@@ -46,6 +65,13 @@ int main()
 		adjacent[a].push_back(b);
 		adjacent[b].push_back(a);
 	}
+
+	maxgrass = 1;
+	// plant starting with field 1 on grass 1
+	plant(1, 1);
+
+	// write to file
+	fout << maxgrass << "\n";
 
 	// Close Streams
 	fin.close();
