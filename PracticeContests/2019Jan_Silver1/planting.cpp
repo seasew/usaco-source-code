@@ -37,7 +37,14 @@ int main()
 	fin >> n;
 	for (int i = 0; i < n - 1; i++)
 	{
-
+		int a, b;
+		fin >> a >> b;
+		// add fields adjacent to the field adjacent to it
+		nearAdjacent[a].insert(nearAdjacent[a].end(), adjacent[b].begin(), adjacent[b].end());
+		nearAdjacent[b].insert(nearAdjacent[b].end(), adjacent[a].begin(), adjacent[a].end());
+		// add adjacent field
+		adjacent[a].push_back(b);
+		adjacent[b].push_back(a);
 	}
 
 	// Close Streams
