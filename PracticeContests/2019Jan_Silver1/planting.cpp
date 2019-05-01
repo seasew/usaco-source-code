@@ -24,16 +24,37 @@ void plant(int field, int grass)
 	// both parameters are 1 based
 	// update fields array
 	fieldArr[field] = grass;
+
+	// update grassArr array with current adjacent grasses
+	for (int adjacentF : adjacent[field])
+	{
+		grassArr[fieldArr[adjacentF]] = true;
+	}
+
+	// then update with newly planted one
 	grassArr[grass] = true;
 
 	// find adjacent fields that have not been planted yet
 	for (int adjacentF : adjacent[field])
 	{
-		//if ()
+		// if zero
+		if (!fieldArr[adjacentF])
+		{
+			// calculate the correct grass
+			for (int i = 1; i < 100001; i++)
+			{
+				if (grassArr[i])
+				{
+					// plant it with the smallest grass possible
+					plant(adjacentF, i);
+
+					// update grassmax
+					maxgrass = std::max(maxgrass, i);
+				}
+			}
+		}
 	}
 
-	// update grassmax
-	//maxgrass = std::max(maxgrass, );
 }
 
 int main()
