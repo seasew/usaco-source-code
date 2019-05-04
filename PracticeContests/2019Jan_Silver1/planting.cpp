@@ -25,6 +25,8 @@ void plant(int field, int grass)
 	// update fields array
 	fieldArr[field] = grass;
 
+	std::fill(grassArr, grassArr + n, false);
+
 	// update grassArr array with current adjacent grasses that have already been planted
 	for (int adjacentF : adjacent[field])
 	{
