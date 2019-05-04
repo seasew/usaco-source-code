@@ -41,7 +41,7 @@ void plant(int field, int grass)
 	int newGrass;
 	for (int i = 1; i < 100001; i++)
 	{
-		if (grassArr[i])
+		if (!grassArr[i])
 		{
 			newGrass = i;
 		}
