@@ -54,12 +54,12 @@ void plant(int field, int grass)
 		// if zero
 		if (!fieldArr[adjacentF])
 		{
-			
+			// update grassmax
+			maxgrass = std::max(maxgrass, newGrass);
 			// plant it with the smallest grass possible
 			plant(adjacentF, newGrass);
 
-			// update grassmax
-			maxgrass = std::max(maxgrass, newGrass);
+			
 		}
 	}
 
@@ -76,6 +76,8 @@ void plant(int field, int grass)
 			plant(nearAdjacentF, newGrass);
 		}
 	}
+
+
 
 }
 
