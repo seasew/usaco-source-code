@@ -96,16 +96,31 @@ int main()
 
 	// Read file
 	fin >> n;
-	for (int i = 0; i < n - 1; i++)
+	for (int i = 0; i < n; i++)
 	{
 		int a, b;
 		fin >> a >> b;
-		// add fields adjacent to the field adjacent to it
-		nearAdjacent[a].insert(nearAdjacent[a].end(), adjacent[b].begin(), adjacent[b].end());
-		nearAdjacent[b].insert(nearAdjacent[b].end(), adjacent[a].begin(), adjacent[a].end());
+		
 		// add adjacent field
 		adjacent[a].push_back(b);
 		adjacent[b].push_back(a);
+	}
+
+	// add the near adjacent fields
+	for (int i = 1; i <= n; i++)
+	{
+		// for all adjacent fields to i
+		for (int adjacentF : adjacent[i])
+		{
+			// use its adjacent fields (!=i) and add to nAdja
+			for (int adjacentF2 : adjacent[adjacentF])
+			{
+				if (adjacentF2 != i)
+				{
+					nearAdjacent[i].push_back(adjacentF2);
+				}
+			}
+		}
 	}
 
 	maxgrass = 1;
