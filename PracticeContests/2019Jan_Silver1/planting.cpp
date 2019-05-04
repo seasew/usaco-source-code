@@ -25,7 +25,7 @@ void plant(int field, int grass)
 	// update fields array
 	fieldArr[field] = grass;
 
-	// update grassArr array with current adjacent grasses
+	// update grassArr array with current adjacent grasses that have already been planted
 	for (int adjacentF : adjacent[field])
 	{
 		if (fieldArr[adjacentF])
@@ -44,6 +44,7 @@ void plant(int field, int grass)
 		if (!grassArr[i])
 		{
 			newGrass = i;
+			break;
 		}
 	}
 
