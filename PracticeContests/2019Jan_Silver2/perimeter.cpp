@@ -22,7 +22,25 @@ const int dy[] = { 0, -1, 0, 1 };
 // depth first search
 void dfs(int i, int j, int label)
 {
+	// position must be #
+	if (!(icecream[i][j] == '#'))
+	{
+		return;
+	}
+	// position must be unlabeled
+	if (labels[i][j])
+	{
+		return;
+	}
 
+	// mark current
+	labels[i][j] = label;
+
+	// mark recursively for each direction
+	for (int a = 0; a < 4; a++)
+	{
+		dfs(i + dx[a], j + dy[a], label);
+	}
 }
 
 int main()
