@@ -11,6 +11,20 @@ PROB: perimeter
 #include <iterator>
 #include <vector>
 
+// . or # original ice cream
+char icecream[1000][1000];
+// 0=not part of blob, >=1 pat of blob
+int labels[1000][1000];
+
+const int dx[] = {1, 0, -1, 0};
+const int dy[] = { 0, -1, 0, 1 };
+
+// depth first search
+void dfs(int i, int j, int label)
+{
+
+}
+
 int main()
 {
 	// Open Streams
@@ -26,11 +40,6 @@ int main()
 		fout.close();
 		return 1;
 	}
-
-	fin >> VARIABLE;
-
-	// Write to File
-	fout << "";
 
 	// Close Streams
 	fin.close();
