@@ -11,10 +11,13 @@ PROB: perimeter
 #include <iterator>
 #include <vector>
 
+int n;
 // . or # original ice cream
 char icecream[1000][1000];
 // 0=not part of blob, >=1 pat of blob
 int labels[1000][1000];
+// areas array, index refers to label
+int areas[1000];
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
@@ -35,6 +38,8 @@ void dfs(int i, int j, int label)
 
 	// mark current
 	labels[i][j] = label;
+	// update area of current label
+	areas[label]++;
 
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
@@ -42,6 +47,13 @@ void dfs(int i, int j, int label)
 		dfs(i + dx[a], j + dy[a], label);
 	}
 }
+
+// calculates the perimeter of the label given
+int perimeter(int label)
+{
+	
+}
+
 
 int main()
 {
@@ -57,6 +69,16 @@ int main()
 		fin.close();
 		fout.close();
 		return 1;
+	}
+
+	// Read file
+	fin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			fin >> icecream[i][j];
+		}
 	}
 
 	// Close Streams
