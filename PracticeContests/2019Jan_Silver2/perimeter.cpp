@@ -25,6 +25,12 @@ const int dy[] = { 0, -1, 0, 1 };
 // depth first search
 void dfs(int i, int j, int label)
 {
+	// i and j must be in bounds
+	if (!(i >= 0 && i < n && j >= 0 && j < n))
+	{
+		return;
+	}
+
 	// position must be #
 	if (!(icecream[i][j] == '#'))
 	{
@@ -53,7 +59,6 @@ int perimeter(int label)
 {
 	
 }
-
 
 int main()
 {
