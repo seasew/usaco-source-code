@@ -39,7 +39,7 @@ void dfs(int i, int j)
 	}
 
 	// position must be unlabeled
-	if (!labels[i][j])
+	if (labels[i][j])
 	{
 		return;
 	}
