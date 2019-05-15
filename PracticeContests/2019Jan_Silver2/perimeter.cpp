@@ -88,7 +88,7 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			fin >> icecream[i][j];
+			fin >> std::noskipws >> icecream[i][j];
 		}
 	}
 
