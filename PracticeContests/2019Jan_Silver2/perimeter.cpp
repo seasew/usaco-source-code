@@ -51,7 +51,12 @@ void dfs(int i, int j)
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
 	{
-		dfs(i + dx[a], j + dy[a]);
+		int newI = i + dx[a];
+		int newJ = j + dy[a];
+		if (icecream[newI][newJ] == '#' && !labels[newI][newJ])
+		{
+			dfs(i, j);
+		}
 	}
 }
 
