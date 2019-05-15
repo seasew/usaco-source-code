@@ -12,6 +12,7 @@ PROB: perimeter
 #include <vector>
 
 int n;
+int curLabel;
 // . or # original ice cream
 char icecream[1000][1000];
 // 0=not part of blob, >=1 pat of blob
@@ -23,7 +24,7 @@ const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
 
 // depth first search
-void dfs(int i, int j, int label)
+void dfs(int i, int j)
 {
 	// i and j must be in bounds
 	if (!(i >= 0 && i < n && j >= 0 && j < n))
@@ -43,21 +44,21 @@ void dfs(int i, int j, int label)
 	}
 
 	// mark current
-	labels[i][j] = label;
+	labels[i][j] = curLabel;
 	// update area of current label
-	areas[label]++;
+	areas[curLabel]++;
 
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
 	{
-		dfs(i + dx[a], j + dy[a], label);
+		dfs(i + dx[a], j + dy[a]);
 	}
 }
 
 // calculates the perimeter of the label given
 int perimeter(int label)
 {
-	
+	return 0;
 }
 
 int main()
@@ -83,6 +84,19 @@ int main()
 		for (int j = 0; j < n; j++)
 		{
 			fin >> icecream[i][j];
+		}
+	}
+
+	// call dfs for every point that has # and is unlabeled
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (icecream[i][j] == '#' && !labels[i][j])
+			{
+				dfs(i, j);
+				curLabel++;
+			}
 		}
 	}
 
