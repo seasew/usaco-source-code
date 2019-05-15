@@ -56,7 +56,7 @@ void dfs(int i, int j)
 		int newJ = j + dy[a];
 		if (icecream[newI][newJ] == '#' && !labels[newI][newJ])
 		{
-			dfs(i, j);
+			dfs(newI, newJ);
 		}
 	}
 }
