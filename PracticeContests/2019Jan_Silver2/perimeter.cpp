@@ -37,8 +37,9 @@ void dfs(int i, int j)
 	{
 		return;
 	}
+
 	// position must be unlabeled
-	if (labels[i][j])
+	if (!labels[i][j])
 	{
 		return;
 	}
@@ -88,9 +89,12 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			fin >> std::noskipws >> icecream[i][j];
+			fin >> std::skipws >> icecream[i][j];
 		}
 	}
+
+	// set starting label
+	curLabel = 1;
 
 	// call dfs for every point that has # and is unlabeled
 	for (int i = 0; i < n; i++)
