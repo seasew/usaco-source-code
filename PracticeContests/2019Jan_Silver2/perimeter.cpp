@@ -16,7 +16,9 @@ int curLabel;
 // 0=not part of blob, >=1 part of blob
 int labels[1000][1000];
 // areas array, index refers to label
-int areas[1000];
+int maxArea;
+int curArea;
+std::vector<int> maxAreaI;
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
@@ -39,7 +41,7 @@ void dfs(int i, int j)
 	// mark current
 	labels[i][j] = curLabel;
 	// update area of current label
-	areas[curLabel]++;
+	curArea++;
 
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
@@ -130,6 +132,9 @@ int main()
 
 	// set starting label
 	curLabel = 1;
+	// set starting area
+	maxArea = 0;
+	curArea = 0;
 
 	// call dfs for every point that has 0
 	for (int i = 0; i < n; i++)
@@ -139,49 +144,40 @@ int main()
 			if (labels[i][j] == 0)
 			{
 				dfs(i, j);
+
+				// cmp curArea with maxArea
+				if (curArea > maxArea)
+				{
+					maxAreaI = { curLabel };
+				}
+				// if they have equal areas, record the label
+				else if (curArea == maxArea)
+				{
+					maxAreaI.push_back(curLabel);
+				}
+
+				// update label for next blob
 				curLabel++;
 			}
 		}
 	}
 
-	// create iterator for first max area
-	auto itr = std::max_element(std::begin(areas), std::end(areas));
-	int maxarea = *itr;
-	// print max area
-	fout << maxarea << " ";
-
-	// calculate the index of the maxarea
-	int curindex = std::distance(areas, itr);
-	// set a minimum perimeter
-	int minperi = 0;
-
-	// find all the maximum areas
-	// while the area found is still the original max area
-	while (areas[curindex] == maxarea)
+	// now there is a max area, a vector with all the labels that have maxArea area
+	int minPeri = 0;
+	for (int label : maxAreaI)
 	{
-		// calculate perimeter of curindex
-		int curperi = perimeter(curindex);
-
-		// cmp with min perimeter
-		if (!minperi)
+		int peri = perimeter(label);
+		if (minPeri == 0)
 		{
-			// if hasn't been initalized
-			minperi = curperi;
+			minPeri = peri;
 		}
 		else
 		{
-			minperi = std::min(minperi, curperi);
+			minPeri = std::min(minPeri, peri);
 		}
-
-		// set the max area to 0
-		// (this is so that max_element won't get this value again)
-		areas[curindex] = 0;
-
-		// update curindex to next max area
-		curindex = std::distance(areas, std::max_element(std::begin(areas), std::end(areas)));
 	}
 
-	fout << minperi << "\n";
+	fout << maxArea << " " << minPeri << "\n";
 
 	// Close Streams
 	fin.close();
