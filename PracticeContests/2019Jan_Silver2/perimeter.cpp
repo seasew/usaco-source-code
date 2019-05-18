@@ -13,8 +13,6 @@ PROB: perimeter
 
 int n;
 int curLabel;
-// . or # original ice cream
-char icecream[1000][1000];
 // 0=not part of blob, >=1 part of blob
 int labels[1000][1000];
 // areas array, index refers to label
@@ -32,14 +30,8 @@ void dfs(int i, int j)
 		return;
 	}
 
-	// position must be #
-	if (!(icecream[i][j] == '#'))
-	{
-		return;
-	}
-
-	// position must be unlabeled
-	if (labels[i][j])
+	// position must be unlabeled & be ice cream
+	if (labels[i][j] != 0)
 	{
 		return;
 	}
@@ -54,7 +46,7 @@ void dfs(int i, int j)
 	{
 		int newI = i + dx[a];
 		int newJ = j + dy[a];
-		if (icecream[newI][newJ] == '#' && !labels[newI][newJ])
+		if (labels[newI][newJ] == 0)
 		{
 			dfs(newI, newJ);
 		}
@@ -120,19 +112,31 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			fin >> std::skipws >> icecream[i][j];
+			char ch;
+			fin >> ch;
+
+			// has ice cream = 0
+			if (ch == '#')
+			{
+				labels[i][j] = 0;
+			}
+			// does not have ice cream = -1
+			else // if (ch == '.')
+			{
+				labels[i][j] = -1;
+			}
 		}
 	}
 
 	// set starting label
 	curLabel = 1;
 
-	// call dfs for every point that has # and is unlabeled
+	// call dfs for every point that has 0
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			if (icecream[i][j] == '#' && !labels[i][j])
+			if (labels[i][j] == 0)
 			{
 				dfs(i, j);
 				curLabel++;
