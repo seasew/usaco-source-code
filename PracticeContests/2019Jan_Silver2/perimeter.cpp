@@ -172,6 +172,9 @@ int main()
 		// set the max area to 0
 		// (this is so that max_element won't get this value again)
 		areas[curindex] = 0;
+
+		// update curindex to next max area
+		curindex = std::distance(areas, std::max_element(std::begin(areas), std::end(areas)));
 	}
 
 	fout << minperi << "\n";
