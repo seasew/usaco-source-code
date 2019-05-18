@@ -110,7 +110,9 @@ int main()
 	}
 
 	// print largest area
-	fout << std::max(std::begin(areas), std::end(areas)) << " ";
+	int areaI = *std::max_element(std::begin(areas), std::end(areas));
+	fout << areaI << " ";
+
 
 	// Close Streams
 	fin.close();
