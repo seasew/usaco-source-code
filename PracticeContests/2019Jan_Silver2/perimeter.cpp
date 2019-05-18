@@ -15,7 +15,7 @@ int n;
 int curLabel;
 // . or # original ice cream
 char icecream[1000][1000];
-// 0=not part of blob, >=1 pat of blob
+// 0=not part of blob, >=1 part of blob
 int labels[1000][1000];
 // areas array, index refers to label
 int areas[1000];
@@ -109,10 +109,39 @@ int main()
 		}
 	}
 
-	// print largest area
-	int areaI = *std::max_element(std::begin(areas), std::end(areas));
-	fout << areaI << " ";
+	// create iterator for first max area
+	auto itr = std::max_element(std::begin(areas), std::end(areas));
+	int maxarea = *itr;
+	// print max area
+	fout << maxarea << " ";
 
+	// calculate the index of the maxarea
+	int curindex = std::distance(areas, itr);
+	// set a minimum perimeter
+	int minperi = 0;
+
+	// find all the maximum areas
+	// while the area found is still the original max area
+	while (areas[curindex] == maxarea)
+	{
+		// calculate perimeter of curindex
+		int curperi = perimeter(curindex);
+
+		// cmp with min perimeter
+		if (!minperi)
+		{
+			// if hasn't been initalized
+			minperi = curperi;
+		}
+		else
+		{
+			minperi = std::min(minperi, curperi);
+		}
+
+		// set the max area to 0
+		// (this is so that max_element won't get this value again)
+		areas[curindex] = 0;
+	}
 
 	// Close Streams
 	fin.close();
