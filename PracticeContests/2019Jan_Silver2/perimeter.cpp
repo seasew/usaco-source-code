@@ -146,6 +146,8 @@ int main()
 				dfs(i, j);
 
 				// cmp curArea with maxArea
+				maxArea = std::max(maxArea, curArea);
+
 				if (curArea > maxArea)
 				{
 					maxAreaI = { curLabel };
@@ -156,6 +158,8 @@ int main()
 					maxAreaI.push_back(curLabel);
 				}
 
+				// reset curarea for next
+				curArea = 0;
 				// update label for next blob
 				curLabel++;
 			}
