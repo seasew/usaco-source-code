@@ -150,7 +150,8 @@ int main()
 
 				if (curArea > maxArea)
 				{
-					maxAreaI = { curLabel };
+					maxAreaI.clear();
+					maxAreaI.push_back(curLabel);
 				}
 				// if they have equal areas, record the label
 				else if (curArea == maxArea)
