@@ -64,7 +64,38 @@ void dfs(int i, int j)
 // calculates the perimeter of the label given
 int perimeter(int label)
 {
-	return 0;
+	int peri = 0;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (labels[i][j] == label)
+			{
+				// original four sides
+				peri += 4;
+
+				// subtract as needed
+				// check all four directions
+				for (int a = 0; a < 4; a++)
+				{
+					int newI = i + dx[a];
+					int newJ = j + dy[a];
+
+					// if in bounds
+					if (newI >= 0 && newI < n && newJ >= 0 && newJ < n)
+					{
+						// check
+						if (labels[newI][newJ] == label)
+						{
+							peri--;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return peri;
 }
 
 int main()
