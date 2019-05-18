@@ -143,6 +143,8 @@ int main()
 		areas[curindex] = 0;
 	}
 
+	fout << minperi << "\n";
+
 	// Close Streams
 	fin.close();
 	fout.close();
