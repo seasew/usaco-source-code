@@ -13,7 +13,7 @@ PROB: perimeter
 
 int n;
 int curLabel;
-// 0=not part of blob, >=1 part of blob
+// 1=not part of blob & is ice cream, >1 part of blob, 0 is no ice cream 
 int labels[1000][1000];
 // areas array, index refers to label
 int maxArea;
@@ -33,7 +33,7 @@ void dfs(int i, int j)
 	}
 
 	// position must be unlabeled & be ice cream
-	if (labels[i][j] != 0)
+	if (labels[i][j] != 1)
 	{
 		return;
 	}
@@ -48,7 +48,7 @@ void dfs(int i, int j)
 	{
 		int newI = i + dx[a];
 		int newJ = j + dy[a];
-		if (labels[newI][newJ] == 0)
+		if (labels[newI][newJ] == 1)
 		{
 			dfs(newI, newJ);
 		}
@@ -117,21 +117,15 @@ int main()
 			char ch;
 			fin >> ch;
 
-			// has ice cream = 0
+			// has ice cream = 1
 			if (ch == '#')
 			{
-				labels[i][j] = 0;
-			}
-			// does not have ice cream = -1
-			else // if (ch == '.')
-			{
-				labels[i][j] = -1;
+				labels[i][j] = 1;
 			}
 		}
 	}
-
 	// set starting label
-	curLabel = 1;
+	curLabel = 2;
 	// set starting area
 	maxArea = 0;
 	curArea = 0;
@@ -141,7 +135,7 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			if (labels[i][j] == 0)
+			if (labels[i][j] == 1)
 			{
 				dfs(i, j);
 
