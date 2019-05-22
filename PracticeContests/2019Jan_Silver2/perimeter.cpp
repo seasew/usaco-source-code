@@ -95,7 +95,7 @@ int perimeter(int label)
 int main()
 {
 	// Open Streams
-	std::ifstream fin("perimeter.in");
+	std::ifstream fin("10.in");
 
 	std::ofstream fout("perimeter.out");
 
