@@ -32,5 +32,8 @@
     <None Include="..\..\..\..\..\..\Pictures\From Internet\11.in">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\..\..\..\..\..\Pictures\From Internet\1.in">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -95,7 +95,7 @@ int perimeter(int label)
 int main()
 {
 	// Open Streams
-	std::ifstream fin("10.in");
+	std::ifstream fin("1.in");
 
 	std::ofstream fout("perimeter.out");
 
@@ -105,7 +105,7 @@ int main()
 		std::cout << "File could not be opened.";
 		fin.close();
 		fout.close();
-		return 1;
+		return 100;
 	}
 
 	// Read file

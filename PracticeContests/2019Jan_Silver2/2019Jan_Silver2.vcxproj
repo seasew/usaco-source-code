@@ -121,6 +121,7 @@
     <ClCompile Include="perimeter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\..\Pictures\From Internet\1.in" />
     <None Include="..\..\..\..\..\..\Pictures\From Internet\10.in" />
     <None Include="..\..\..\..\..\..\Pictures\From Internet\11.in" />
     <None Include="perimeter.in" />
