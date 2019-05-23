@@ -93,7 +93,7 @@ int perimeter(int label)
 int main()
 {
 	// Open Streams
-	std::ifstream fin("C:\\Users\\alina_000\\Pictures\\From Internet\\10.in");
+	std::ifstream fin("perimeter.in");
 
 	std::ofstream fout("perimeter.out");
 
