@@ -15,10 +15,9 @@ int n;
 int curLabel;
 // 1=not part of blob & is ice cream, >1 part of blob, 0 is no ice cream 
 int labels[1000][1000];
-// areas array, index refers to label
-int maxArea;
-int curArea;
-std::vector<int> maxAreaI;
+
+// area array
+int areas[500000];
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
@@ -40,8 +39,6 @@ void dfs(int i, int j)
 
 	// mark current
 	labels[i][j] = curLabel;
-	// update area of current label
-	curArea++;
 
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
@@ -50,6 +47,7 @@ void dfs(int i, int j)
 		int newJ = j + dy[a];
 		if (labels[newI][newJ] == 1)
 		{
+			areas[curLabel]++;
 			dfs(newI, newJ);
 		}
 	}
@@ -95,7 +93,7 @@ int perimeter(int label)
 int main()
 {
 	// Open Streams
-	std::ifstream fin("1.in");
+	std::ifstream fin("C:\\Users\\alina_000\\Pictures\\From Internet\\10.in");
 
 	std::ofstream fout("perimeter.out");
 
@@ -126,9 +124,6 @@ int main()
 	}
 	// set starting label
 	curLabel = 2;
-	// set starting area
-	maxArea = 0;
-	curArea = 0;
 
 	// call dfs for every point that has 0
 	for (int i = 0; i < n; i++)
@@ -138,41 +133,34 @@ int main()
 			if (labels[i][j] == 1)
 			{
 				dfs(i, j);
-
-				if (curArea > maxArea)
-				{
-					maxAreaI.clear();
-					maxAreaI.push_back(curLabel);
-				}
-				// if they have equal areas, record the label
-				else if (curArea == maxArea)
-				{
-					maxAreaI.push_back(curLabel);
-				}
-
-				// cmp curArea with maxArea
-				maxArea = std::max(maxArea, curArea);
-
-				// reset curarea for next
-				curArea = 0;
 				// update label for next blob
 				curLabel++;
 			}
 		}
 	}
 
-	// now there is a max area, a vector with all the labels that have maxArea area
-	int minPeri = 0;
-	for (int label : maxAreaI)
+	// find maxArea of areas
+	int maxArea = 0;
+	for (int area : areas)
 	{
-		int peri = perimeter(label);
-		if (minPeri == 0)
+		maxArea = std::max(maxArea, area);
+	}
+
+	// find the labels that have value of maxArea
+	int minPeri = 0;
+	for (int i = 2; i < 500000; i++)
+	{
+		if (areas[i] == maxArea)
 		{
-			minPeri = peri;
-		}
-		else
-		{
-			minPeri = std::min(minPeri, peri);
+			int peri = perimeter(i);
+			if (minPeri == 0)
+			{
+				minPeri = peri;
+			}
+			else
+			{
+				minPeri = std::min(minPeri, peri);
+			}
 		}
 	}
 
