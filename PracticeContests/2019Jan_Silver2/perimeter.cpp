@@ -45,7 +45,7 @@ void dfs(int i, int j)
 
 	// mark recursively for each direction
 	// keep track of the num of labels on the NSEW
-	int peri = 0;
+	int peri = 4;
 	for (int a = 0; a < 4; a++)
 	{
 		int newI = i + dx[a];
@@ -53,13 +53,12 @@ void dfs(int i, int j)
 		if (labels[newI][newJ] == 1)
 		{
 			dfs(newI, newJ);
-			// update peri
-			peri++;
+		}
+		else
+		{
+			peri--;
 		}
 	}
-	
-	// we want only the number of sides that didn't have a neighboring label
-	peri = 4 - peri;
 
 	peris[curLabel] += peri;
 }
