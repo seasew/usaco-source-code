@@ -17,9 +17,9 @@ int curLabel;
 int labels[1000][1000];
 
 // area array
-int areas[500000];
+int areas[300000];
 // perimeter array
-int peris[500000];
+int peris[300000];
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
@@ -98,7 +98,7 @@ int perimeter(int label)
 int main()
 {
 	// Open Streams
-	std::ifstream fin("C:\\Users\\alina_000\\Pictures\\From Internet\\10.in");
+	std::ifstream fin("perimeter.in");
 
 	std::ofstream fout("perimeter.out");
 
