@@ -34,8 +34,23 @@ int main()
 		return 1;
 	}
 	// read file
+	fin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		fin >> x_arr[i] >> y_arr[i];
+	}
 
-	// Write to File
+	// output starts at n
+	int out = n;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			fout << x_arr[i] << ", " << y_arr[i] << " - " << x_arr[j] << ", " << y_arr[j] << "\n";
+		}
+	}
+
+	// write to file
 
 	// Close Streams
 	fin.close();
