@@ -14,7 +14,7 @@ PROB: perimeter
 int n;
 int curLabel;
 // 1=not part of blob & is ice cream, >1 part of blob, 0 is no ice cream 
-int labels[1000][1000];
+int labels[1050][1050];
 
 // area array
 int areas[300000];
