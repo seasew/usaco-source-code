@@ -45,7 +45,7 @@ void dfs(int i, int j)
 
 	// mark recursively for each direction
 	// keep track of the num of labels on the NSEW
-	int peri = 4;
+	peris[curLabel] = 4;
 	for (int a = 0; a < 4; a++)
 	{
 		int newI = i + dx[a];
@@ -56,11 +56,9 @@ void dfs(int i, int j)
 		}
 		else
 		{
-			peri--;
+			peris[curLabel]--;
 		}
 	}
-
-	peris[curLabel] += peri;
 }
 
 // calculates the perimeter of the label given
