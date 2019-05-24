@@ -11,6 +11,13 @@ PROB: mountains
 #include <iterator>
 #include <vector>
 
+// <= 100000
+int n;
+// array of x values (starts at index 0)
+int x_arr[100002];
+// y values
+int y_arr[100002];
+
 int main()
 {
 	// Open Streams
