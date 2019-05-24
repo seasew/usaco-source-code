@@ -18,6 +18,8 @@ int labels[1000][1000];
 
 // area array
 int areas[500000];
+// perimeter array
+int peris[500000];
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
@@ -42,6 +44,8 @@ void dfs(int i, int j)
 	areas[curLabel]++;
 
 	// mark recursively for each direction
+	// keep track of the num of labels on the NSEW
+	int peri = 0;
 	for (int a = 0; a < 4; a++)
 	{
 		int newI = i + dx[a];
@@ -49,8 +53,15 @@ void dfs(int i, int j)
 		if (labels[newI][newJ] == 1)
 		{
 			dfs(newI, newJ);
+			// update peri
+			peri++;
 		}
 	}
+	
+	// we want only the number of sides that didn't have a neighboring label
+	peri = 4 - peri;
+
+	peris[curLabel] += peri;
 }
 
 // calculates the perimeter of the label given
@@ -147,19 +158,19 @@ int main()
 	}
 
 	// find the labels that have value of maxArea
+	// and cmp their perimeters
 	int minPeri = 0;
 	for (int i = 2; i < 500000; i++)
 	{
 		if (areas[i] == maxArea)
 		{
-			int peri = perimeter(i);
 			if (minPeri == 0)
 			{
-				minPeri = peri;
+				minPeri = peris[i];
 			}
 			else
 			{
-				minPeri = std::min(minPeri, peri);
+				minPeri = std::min(minPeri, peris[i]);
 			}
 		}
 	}
