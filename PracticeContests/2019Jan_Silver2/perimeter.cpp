@@ -39,6 +39,7 @@ void dfs(int i, int j)
 
 	// mark current
 	labels[i][j] = curLabel;
+	areas[curLabel]++;
 
 	// mark recursively for each direction
 	for (int a = 0; a < 4; a++)
@@ -47,7 +48,6 @@ void dfs(int i, int j)
 		int newJ = j + dy[a];
 		if (labels[newI][newJ] == 1)
 		{
-			areas[curLabel]++;
 			dfs(newI, newJ);
 		}
 	}
