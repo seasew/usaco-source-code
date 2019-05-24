@@ -17,9 +17,9 @@ int curLabel;
 int labels[1050][1050];
 
 // area array
-int areas[300000];
+int areas[1000000];
 // perimeter array
-int peris[300000];
+int peris[1000000];
 
 const int dx[] = {1, 0, -1, 0};
 const int dy[] = { 0, -1, 0, 1 };
