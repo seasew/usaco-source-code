@@ -45,17 +45,14 @@ void dfs(int i, int j)
 
 	// mark recursively for each direction
 	// keep track of the num of labels on the NSEW
-	peris[curLabel] = 4;
+	peris[curLabel] += 4;
 	for (int a = 0; a < 4; a++)
 	{
 		int newI = i + dx[a];
 		int newJ = j + dy[a];
-		if (labels[newI][newJ] == 1)
+		if ((newI >= 0 && newI < n && newJ >= 0 && newJ < n) && labels[newI][newJ] >= 1)
 		{
 			dfs(newI, newJ);
-		}
-		else
-		{
 			peris[curLabel]--;
 		}
 	}
