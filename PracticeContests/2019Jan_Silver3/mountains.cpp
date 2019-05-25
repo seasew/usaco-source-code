@@ -23,7 +23,7 @@ bool cmp(int i1, int i2)
 {
 	// sort differences ascending
 
-	if ((xarr[i1] - yarr[i1]) <= (xarr[i2] - yarr[i2]))
+	if ((xarr[i1] - yarr[i1]) < (xarr[i2] - yarr[i2]))
 	{
 		return true;
 	}
