@@ -17,6 +17,8 @@ int n;
 int x_arr[100002];
 // y values
 int y_arr[100002];
+// 2D array with true if overlap, false if not
+bool hasoverlap[100002];
 
 int main()
 {
@@ -46,7 +48,41 @@ int main()
 	{
 		for (int j = i + 1; j < n; j++)
 		{
-			fout << x_arr[i] << ", " << y_arr[i] << " - " << x_arr[j] << ", " << y_arr[j] << "\n";
+			// check if it overlaps
+			// find the larger point
+			int maxI;
+			int minI;
+			if (y_arr[i] >= y_arr[j])
+			{
+				maxI = i;
+				minI = j;
+			}
+			else
+			{
+				maxI = j;
+				minI = i;
+			}
+
+			// is the lower point on the left of the larger point?
+			if (x_arr[minI] <= x_arr[maxI])
+			{
+				// subtract and compare
+				if ((x_arr[maxI] - x_arr[minI]) <= (y_arr[maxI] - y_arr[minI]))
+				{
+					// then it overlaps!
+					hasoverlap[minI] = false;
+				}
+			}
+			// on the right.
+			else
+			{
+				// subtract and compare
+				if (abs(x_arr[minI] - x_arr[maxI]) <= (y_arr[maxI] - y_arr[minI]))
+				{
+					// then it overlaps!
+					hasoverlap[minI] = false;
+				}
+			}
 		}
 	}
 
