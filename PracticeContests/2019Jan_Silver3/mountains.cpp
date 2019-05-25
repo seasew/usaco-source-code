@@ -41,9 +41,8 @@ int main()
 	{
 		fin >> x_arr[i] >> y_arr[i];
 	}
-
-	// output starts at n
-	int out = n;
+	
+	// check every pair for overlap
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = i + 1; j < n; j++)
@@ -86,7 +85,18 @@ int main()
 		}
 	}
 
+	int out = 0;
+	// Find the number of points with true value (meaning they never had overlap)
+	for (int i = 0; i < n; i++)
+	{
+		if (hasoverlap[i])
+		{
+			out++;
+		}
+	}
+
 	// write to file
+	fout << out << "\n";
 
 	// Close Streams
 	fin.close();
