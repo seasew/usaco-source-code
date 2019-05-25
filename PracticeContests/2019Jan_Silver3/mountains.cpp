@@ -55,7 +55,23 @@ int main()
 		id[i] = i;
 	}
 
-	// sort indexes based on the difference (x-y from small to large)
+	// sort indexes using method
+	std::sort(id, id + n, cmp);
+
+	// walk through the sorted differences and compare the sums
+	int out = 1;
+	int maxsum = xarr[id[0]] + yarr[id[0]];
+	for (int i = 1; i < n; i++)
+	{
+		// when the new sum is greater than the current max sum
+		if ((xarr[id[i]] + yarr[id[i]]) > maxsum)
+		{
+			// then there is no overlap
+			out++;
+			// set the new maxsum
+			maxsum = (xarr[id[i]] + yarr[id[i]]);
+		}
+	}
 
 	// write to file
 
