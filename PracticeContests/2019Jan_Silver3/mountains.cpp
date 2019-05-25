@@ -13,10 +13,23 @@ PROB: mountains
 
 // <= 100000
 int n;
-// array of difference values (starts at index 0)
-int darr[100002];
-// array of sum values
-int sarr[100002];
+// array of points
+int xarr[100002];
+int yarr[100002];
+// array of sorted indexes
+int id[100002];
+
+bool cmp(int i1, int i2)
+{
+	// sort differences ascending
+
+	if ((xarr[i1] - yarr[i1]) <= (xarr[i2] - yarr[i2]))
+	{
+		return true;
+	}
+
+	return false;
+}
 
 int main()
 {
@@ -33,71 +46,18 @@ int main()
 		fout.close();
 		return 1;
 	}
+
 	// read file
 	fin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		int x, y;
-		fin >> x >> y;
-		darr[i] = x - y;
-		sarr[i] = x + y;
-	}
-	
-	// check every pair for overlap
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			// check if it overlaps
-			// find the larger point
-			int maxI;
-			int minI;
-			if (y_arr[i] >= y_arr[j])
-			{
-				maxI = i;
-				minI = j;
-			}
-			else
-			{
-				maxI = j;
-				minI = i;
-			}
-
-			// is the lower point on the left of the larger point?
-			if (x_arr[minI] <= x_arr[maxI])
-			{
-				// subtract and compare
-				if ((x_arr[maxI] - x_arr[minI]) <= (y_arr[maxI] - y_arr[minI]))
-				{
-					// then it overlaps!
-					hasoverlap[minI] = true;
-				}
-			}
-			// on the right.
-			else
-			{
-				// subtract and compare
-				if (abs(x_arr[minI] - x_arr[maxI]) <= (y_arr[maxI] - y_arr[minI]))
-				{
-					// then it overlaps!
-					hasoverlap[minI] = true;
-				}
-			}
-		}
+		fin >> xarr[i] >> yarr[i];
+		id[i] = i;
 	}
 
-	int out = 0;
-	// Find the number of points with true value (meaning they never had overlap)
-	for (int i = 0; i < n; i++)
-	{
-		if (!hasoverlap[i])
-		{
-			out++;
-		}
-	}
+	// sort indexes based on the difference (x-y from small to large)
 
 	// write to file
-	fout << out << "\n";
 
 	// Close Streams
 	fin.close();
