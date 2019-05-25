@@ -13,12 +13,10 @@ PROB: mountains
 
 // <= 100000
 int n;
-// array of x values (starts at index 0)
-int x_arr[100002];
-// y values
-int y_arr[100002];
-// 2D array with true if overlap, false if not
-bool hasoverlap[100002];
+// array of difference values (starts at index 0)
+int darr[100002];
+// array of sum values
+int sarr[100002];
 
 int main()
 {
@@ -39,7 +37,10 @@ int main()
 	fin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		fin >> x_arr[i] >> y_arr[i];
+		int x, y;
+		fin >> x >> y;
+		darr[i] = x - y;
+		sarr[i] = x + y;
 	}
 	
 	// check every pair for overlap
@@ -69,7 +70,7 @@ int main()
 				if ((x_arr[maxI] - x_arr[minI]) <= (y_arr[maxI] - y_arr[minI]))
 				{
 					// then it overlaps!
-					hasoverlap[minI] = false;
+					hasoverlap[minI] = true;
 				}
 			}
 			// on the right.
@@ -79,7 +80,7 @@ int main()
 				if (abs(x_arr[minI] - x_arr[maxI]) <= (y_arr[maxI] - y_arr[minI]))
 				{
 					// then it overlaps!
-					hasoverlap[minI] = false;
+					hasoverlap[minI] = true;
 				}
 			}
 		}
@@ -89,7 +90,7 @@ int main()
 	// Find the number of points with true value (meaning they never had overlap)
 	for (int i = 0; i < n; i++)
 	{
-		if (hasoverlap[i])
+		if (!hasoverlap[i])
 		{
 			out++;
 		}
