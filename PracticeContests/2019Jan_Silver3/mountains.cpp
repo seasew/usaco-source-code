@@ -74,6 +74,7 @@ int main()
 	}
 
 	// write to file
+	fout << out << "\n";
 
 	// Close Streams
 	fin.close();
