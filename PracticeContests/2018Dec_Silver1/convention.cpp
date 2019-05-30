@@ -65,6 +65,17 @@ int main()
 		cows_d[i] = cows_st[i + 1] - cows_st[i];
 	}
 
+	// Output -- maximum value of (last - first)
+	int out = 0;
+	for (int i = 0; i < m - 1; i++)
+	{
+		if (bus_index[i + 1] - bus_index[i] > out)
+		{
+			out = bus_index[i + 1] - bus_index[i];
+		}
+	}
+
+	fout << out;
 
 	// Close Streams
 	fin.close();
