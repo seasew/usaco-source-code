@@ -27,7 +27,22 @@ int bus_index[20000];
 
 void chooseCows(int startIndex)
 {
+	int maxEndIndex = 0;
+	for (int i = 0; i < c; i++)
+	{
+		// the index of the end of the bus split (exclusive)
+		int endIndex;
+		if (i == 0)
+		{
+			endIndex = i + 1;
+		}
 
+		endIndex = std::max_element(std::begin(cows_d), std::end(cows_d) + i) - std::begin(cows_d) + 1;
+
+		maxEndIndex = std::max(maxEndIndex, endIndex);
+	}
+
+	chooseCows
 }
 
 int main()
@@ -47,6 +62,8 @@ int main()
 	}
 
 	// the output is the maximum of the difference between first and last in the buses
+
+	bus_index[0] = 0;
 
 	// read file
 	fin >> n >> m >> c;
