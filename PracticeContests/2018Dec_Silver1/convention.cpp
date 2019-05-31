@@ -19,11 +19,11 @@ int m;
 int c;
 
 // array of cow start times
-int cows_st[200000];
+int cows_st[100000];
 // array of adjacent cow differences (size is N-1)
-int cows_d[200000];
+int cows_d[100000];
 // array of index beginning of each M bus split (index[0] = 0, etc.) 
-int bus_index[20000];
+int bus_index[10000];
 int curBusIndex;
 
 void chooseCows(int startIndex)
@@ -36,12 +36,12 @@ void chooseCows(int startIndex)
 	bus_index[curBusIndex] = startIndex;
 	curBusIndex++;
 	
-	int maxEndIndex = 0;
+	int maxEndIndex = startIndex;
 	// if i was the length of the cow busline
 	for (int i = 0; i < c; i++)
 	{
 		// the current index of the end of the bus split (exclusive)
-		int endIndex = startIndex + i;
+		int endIndex = startIndex + i + 1;
 
 		// if the new difference is greater than the current max diff
 		if (cows_d[endIndex] > cows_d[maxEndIndex])
@@ -51,7 +51,7 @@ void chooseCows(int startIndex)
 		}
 	}
 
-	chooseCows(maxEndIndex);
+	chooseCows(maxEndIndex + 1);
 }
 
 int main()
