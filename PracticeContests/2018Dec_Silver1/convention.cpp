@@ -91,6 +91,9 @@ int main()
 		cows_d[i] = cows_st[i + 1] - cows_st[i];
 	}
 
+	// call chooseCow
+	chooseCows(0);
+
 	// Output -- maximum value of (last - first)
 	int out = 0;
 	for (int i = 0; i < m - 1; i++)
