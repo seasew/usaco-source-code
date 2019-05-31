@@ -24,9 +24,18 @@ int cows_st[200000];
 int cows_d[200000];
 // array of index beginning of each M bus split (index[0] = 0, etc.) 
 int bus_index[20000];
+int curBusIndex;
 
 void chooseCows(int startIndex)
 {
+	if (startIndex < 0 || startIndex >= n)
+	{
+		return;
+	}
+
+	bus_index[curBusIndex] = startIndex;
+	curBusIndex++;
+	
 	int maxEndIndex = 0;
 	for (int i = 0; i < c; i++)
 	{
@@ -42,7 +51,7 @@ void chooseCows(int startIndex)
 		maxEndIndex = std::max(maxEndIndex, endIndex);
 	}
 
-	chooseCows
+	chooseCows(maxEndIndex);
 }
 
 int main()

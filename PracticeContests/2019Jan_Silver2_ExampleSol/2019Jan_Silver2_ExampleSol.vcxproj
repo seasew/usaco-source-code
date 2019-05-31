@@ -23,6 +23,7 @@
     <ProjectGuid>{006498FC-6134-4C3A-902B-B0EB39E6F192}</ProjectGuid>
     <RootNamespace>My2019JanSilver2ExampleSol</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>2019Jan_Silver2_ExampleSolution</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
