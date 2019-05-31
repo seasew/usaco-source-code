@@ -37,18 +37,18 @@ void chooseCows(int startIndex)
 	curBusIndex++;
 	
 	int maxEndIndex = 0;
+	// if i was the length of the cow busline
 	for (int i = 0; i < c; i++)
 	{
-		// the index of the end of the bus split (exclusive)
-		int endIndex;
-		if (i == 0)
+		// the current index of the end of the bus split (exclusive)
+		int endIndex = startIndex + i;
+
+		// if the new difference is greater than the current max diff
+		if (cows_d[endIndex] > cows_d[maxEndIndex])
 		{
-			endIndex = i + 1;
+			// assign a new max index
+			maxEndIndex = endIndex;
 		}
-
-		endIndex = std::max_element(std::begin(cows_d), std::end(cows_d) + i) - std::begin(cows_d) + 1;
-
-		maxEndIndex = std::max(maxEndIndex, endIndex);
 	}
 
 	chooseCows(maxEndIndex);
