@@ -20,38 +20,10 @@ int c;
 
 // array of cow start times
 int cows_st[100000];
-// array of adjacent cow differences (size is N-1)
-int cows_d[100000];
-// array of index beginning of each M bus split (index[0] = 0, etc.) 
-int bus_index[10000];
-int curBusIndex;
 
-void chooseCows(int startIndex)
+bool doesTWork(int time)
 {
-	if (startIndex < 0 || startIndex >= n)
-	{
-		return;
-	}
 
-	bus_index[curBusIndex] = startIndex;
-	curBusIndex++;
-	
-	int maxEndIndex = startIndex;
-	// if i was the length of the cow busline
-	for (int i = 0; i < c; i++)
-	{
-		// the current index of the end of the bus split (exclusive)
-		int endIndex = startIndex + i + 1;
-
-		// if the new difference is greater than the current max diff
-		if (cows_d[endIndex] > cows_d[maxEndIndex])
-		{
-			// assign a new max index
-			maxEndIndex = endIndex;
-		}
-	}
-
-	chooseCows(maxEndIndex + 1);
 }
 
 int main()
@@ -70,9 +42,6 @@ int main()
 		return 1;
 	}
 
-	// the output is the maximum of the difference between first and last in the buses
-
-	bus_index[0] = 0;
 
 	// read file
 	fin >> n >> m >> c;
@@ -85,26 +54,26 @@ int main()
 	// sort the array ascending
 	std::sort(cows_st, cows_st + n);
 
-	// another array for the differences
-	for (int i = 0; i < n - 1; i++)
+	// binary search
+	int startPt = 0;
+	int endPt = cows_st[n - 1];
+	bool continueT = true;
+	while (continueT)
 	{
-		cows_d[i] = cows_st[i + 1] - cows_st[i];
-	}
-
-	// call chooseCow
-	chooseCows(0);
-
-	// Output -- maximum value of (last - first)
-	int out = 0;
-	for (int i = 0; i < m - 1; i++)
-	{
-		if (bus_index[i + 1] - bus_index[i] > out)
+		int curPt = (startPt + endPt) / 2;
+		bool tPossible = doesTWork(curPt);
+		// update startPt and endPt based on tPossible
+		if (tPossible)
 		{
-			out = bus_index[i + 1] - bus_index[i];
+			// decrease value
+			endPt = curPt;
+		}
+		else
+		{
+			// increase value
+			startPt = curPt;
 		}
 	}
-
-	fout << out;
 
 	// Close Streams
 	fin.close();
