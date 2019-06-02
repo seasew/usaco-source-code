@@ -113,9 +113,16 @@ int main()
 	while (continueT)
 	{
 		int curPt = (startPt + endPt) / 2;
-		bool tPossible = doesTWork(curPt);
+		int tPossible = doesTWork(curPt);
+
+		// continue?
+		if (tPossible >= 0)
+		{
+
+		}
+
 		// update startPt and endPt based on tPossible
-		if (tPossible)
+		if (tPossible >= 0)
 		{
 			// decrease value
 			endPt = curPt;
@@ -127,7 +134,7 @@ int main()
 		}
 	}
 
-	fout << curPt << "\n";
+	fout << doesTWork(curPt + 1) << "\n";
 
 	// Close Streams
 	fin.close();
