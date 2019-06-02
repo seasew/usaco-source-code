@@ -23,7 +23,49 @@ int cows_st[100000];
 
 bool doesTWork(int time)
 {
+	int curBus = 0;
+	int curCows = 0;
+	int curBusStartTime = cows_st[0];
+	// for each cow
+	for (int i = 0; i < n; i++)
+	{
+		// new bus needed?
+		if (curCows >= c)
+		{
+			// reset
+			curBus++;
+			curBusStartTime = cows_st[i];
+			// count cow i as a current cow
+			curCows = 1;
+		}
+		// continue the current bus
+		else if (curCows < c)
+		{
+			// if the current cow's start time is too big to fit into the current bus' range
+			if (cows_st[i] > curBusStartTime + time)
+			{
+				// new bus needed
+				// reset
+				curBus++;
+				curBusStartTime = cows_st[i];
+				// count cow i as a current cow
+				curCows = 1;
+			}
+			// fit the current cow into the current bus
+			else
+			{
+				// update curCows
+				curCows++;
+			}
+		}
+	}
 
+	// check if the bus count exceeds m
+	if (curBus > m)
+	{
+		return false;
+	}
+	return true;
 }
 
 int main()
