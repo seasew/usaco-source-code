@@ -21,8 +21,12 @@ int c;
 // array of cow start times
 int cows_st[100000];
 
-bool doesTWork(int time)
+// positive int representing the max time if using time 'time'
+// otherwise negative int meaning time 'time' is not possible to use
+int doesTWork(int time)
 {
+	int maxWait = 0;
+
 	int curBus = 0;
 	int curCows = 0;
 	int curBusStartTime = cows_st[0];
@@ -32,6 +36,9 @@ bool doesTWork(int time)
 		// new bus needed?
 		if (curCows >= c)
 		{
+			// calculate the wait time for the first cow of this bus
+			maxWait = std::max(maxWait, curBusStartTime);
+
 			// reset
 			curBus++;
 			curBusStartTime = cows_st[i];
@@ -45,6 +52,9 @@ bool doesTWork(int time)
 			if (cows_st[i] > curBusStartTime + time)
 			{
 				// new bus needed
+				// calculate the wait time for the first cow of this bus
+				maxWait = std::max(maxWait, curBusStartTime);
+
 				// reset
 				curBus++;
 				curBusStartTime = cows_st[i];
@@ -63,9 +73,9 @@ bool doesTWork(int time)
 	// check if the bus count exceeds m
 	if (curBus > m)
 	{
-		return false;
+		return -1;
 	}
-	return true;
+	return maxWait;
 }
 
 int main()
@@ -116,6 +126,8 @@ int main()
 			startPt = curPt;
 		}
 	}
+
+	fout << curPt << "\n";
 
 	// Close Streams
 	fin.close();
