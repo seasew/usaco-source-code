@@ -107,18 +107,31 @@ int main()
 	std::sort(cows_st, cows_st + n);
 
 	// binary search
+	int tPossible;
 	int startPt = 0;
 	int endPt = cows_st[n - 1];
 	bool continueT = true;
 	while (continueT)
 	{
 		int curPt = (startPt + endPt) / 2;
-		int tPossible = doesTWork(curPt);
+		tPossible = doesTWork(curPt);
 
-		// continue?
+		// is this the smallest possible time T?
+		// check if the search should continue
 		if (tPossible >= 0)
 		{
-
+			// do not continue if the currentPoint is possible, but (curPt - 1) is not possible
+			if (curPt != 0 && doesTWork(curPt - 1) < 0)
+			{
+				continueT = false;
+				break;
+			}
+			// or, current point is 0
+			else if (curPt == 0)
+			{
+				continueT = false;
+				break;
+			}
 		}
 
 		// update startPt and endPt based on tPossible
@@ -134,7 +147,7 @@ int main()
 		}
 	}
 
-	fout << doesTWork(curPt + 1) << "\n";
+	fout << tPossible << "\n";
 
 	// Close Streams
 	fin.close();
