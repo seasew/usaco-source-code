@@ -34,9 +34,8 @@ int doesTWork(int time)
 	for (int i = 0; i < n; i++)
 	{
 		// new bus needed?
-		if (curCows >= c)
+		if (curCows >= c || ((curCows < c) && (cows_st[i] > curBusStartTime + time)))
 		{
-
 			// reset
 			curBus++;
 			curBusStartTime = cows_st[i];
@@ -46,26 +45,12 @@ int doesTWork(int time)
 		// continue the current bus
 		else if (curCows < c)
 		{
-			// if the current cow's start time is too big to fit into the current bus' range
-			if (cows_st[i] > curBusStartTime + time)
-			{
-				// new bus needed
-
-				// reset
-				curBus++;
-				curBusStartTime = cows_st[i];
-				// count cow i as a current cow
-				curCows = 1;
-			}
 			// fit the current cow into the current bus
-			else
-			{
-				// calculate max wait
-				maxWait = std::max(maxWait, cows_st[i] - curBusStartTime);
+			// calculate max wait
+			maxWait = std::max(maxWait, cows_st[i] - curBusStartTime);
 
-				// update curCows
-				curCows++;
-			}
+			// update curCows
+			curCows++;
 		}
 	}
 
