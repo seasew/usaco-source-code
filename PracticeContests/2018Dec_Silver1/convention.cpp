@@ -27,7 +27,7 @@ int doesTWork(int time)
 {
 	int maxWait = 0;
 
-	int curBus = 0;
+	int curBus = 1;
 	int curCows = 0;
 	int curBusStartTime = cows_st[0];
 	// for each cow
