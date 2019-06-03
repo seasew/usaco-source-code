@@ -36,8 +36,6 @@ int doesTWork(int time)
 		// new bus needed?
 		if (curCows >= c)
 		{
-			// calculate the wait time for the first cow of this bus
-			maxWait = std::max(maxWait, curBusStartTime);
 
 			// reset
 			curBus++;
@@ -52,8 +50,6 @@ int doesTWork(int time)
 			if (cows_st[i] > curBusStartTime + time)
 			{
 				// new bus needed
-				// calculate the wait time for the first cow of this bus
-				maxWait = std::max(maxWait, curBusStartTime);
 
 				// reset
 				curBus++;
@@ -64,6 +60,9 @@ int doesTWork(int time)
 			// fit the current cow into the current bus
 			else
 			{
+				// calculate max wait
+				maxWait = std::max(maxWait, cows_st[i] - curBusStartTime);
+
 				// update curCows
 				curCows++;
 			}
