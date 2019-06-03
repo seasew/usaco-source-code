@@ -34,6 +34,8 @@ int doesTWork(int time)
 	for (int i = 0; i < n; i++)
 	{
 		// new bus needed?
+		// 1: the number of cows in the current bus exceeds c
+		// 2: the ith cow's start time is out of the range of the current bus
 		if (curCows >= c || ((curCows < c) && (cows_st[i] > curBusStartTime + time)))
 		{
 			// reset
