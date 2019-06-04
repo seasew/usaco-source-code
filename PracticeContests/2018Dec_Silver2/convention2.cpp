@@ -13,14 +13,22 @@ PROB: convention2
 
 // num of cows
 int n;
+// the sorted indexes (sorted by arrival time)
+int indexes[100050];
 // the arrival times
 int arrivals[100050];
-// the time spent grazing (corresponds to the arrivals array
+// the time spent grazing 
 int times[100050];
-// true if waiting, false if not (corresponds to the arrivals array)
+// true if waiting, false if not
 bool waiting_cows[100050];
-// senority array (corresponds to the arrivals array)
+// senority array
 int senority[100050];
+
+// method that sorts the indexes based on arrivals
+bool cmp(int i1, int i2)
+{
+	return arrivals[i1] < arrivals[i2];
+}
 
 int main()
 {
@@ -44,7 +52,12 @@ int main()
 		fin >> arrivals[i];
 		fin >> times[i];
 		senority[i] = i + 1;
+		indexes[i] = i;
 	}
+
+	// sort index array using custom method
+	std::sort(indexes, indexes + n, cmp);
+
 
 	// Close Streams
 	fin.close();
