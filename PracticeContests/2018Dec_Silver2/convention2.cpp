@@ -46,6 +46,43 @@ bool cmp(int i1, int i2)
 	}
 }
 
+// method that finds the index that is the upper bound of the time
+int findBound(int time)
+{
+	// looks through the arrival times array using binary search
+	// find arrivals[i] >= time
+	int outI = -1;
+	bool found = false;
+	int startI = 0;
+	int endI = n - 1;
+	while (!found)
+	{
+		int curI = (startI + endI) / 2;
+
+		// check if we need to continue searching
+		if ((arrivals[curI] >= time && curI == 0)
+			|| (arrivals[curI] >= time && arrivals[curI - 1] < time))
+		{
+			// this means we don't need to keep searching
+			outI = curI;
+			found = true;
+			break;
+		}
+
+		// update the start and end pointers
+		if (arrivals[curI] >= time)
+		{
+			endI = curI;
+		}
+		else // if arrivals[curI] < time
+		{
+			startI = curI;
+		}
+	}
+
+	return outI;
+}
+
 int main()
 {
 	// Open Streams
@@ -89,7 +126,8 @@ int main()
 		int endWaitI;
 		// find the upper index bound (exclusive) of the waiting cows
 		// cows with arrival times <= curTime
-		// TODO
+		// call method
+		endWaitI = findBound(curTime);
 		
 		// compare ith cow's waiting time with maxTime
 		maxTime = std::max(maxTime, curTime - arrivals[indexes[curI]]);
