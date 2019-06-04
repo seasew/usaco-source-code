@@ -44,8 +44,6 @@ bool cmp(int i1, int i2)
 		// smaller senority comes before
 		return senority[i1] < senority[i2];
 	}
-
-	return arrivals[i1] < arrivals[i2];
 }
 
 int main()
@@ -79,12 +77,24 @@ int main()
 	std::sort(indexes, indexes + n, cmp);
 
 	int maxTime = 0;
-	int curTime = arrivals[indexes[0]] + times[indexes[0]];
+	int curTime = arrivals[indexes[0]];
 	// look at each of the indexes in order of arrival time
 	for (int i = 0; i < n; i++)
 	{
+		// update curTime
+		curTime += times[indexes[0]];
 
+		// update waiting array based on the curTime
+		// for all cows with arrival time <= curTime
+		// change waiting to true
+
+		// compare ith cow's waiting time with maxTime
+		maxTime = std::max(maxTime, curTime - arrivals[indexes[i]]);
+
+		// figure out -- which cow should eat next?
 	}
+
+	fout << maxTime << "\n";
 
 	// Close Streams
 	fin.close();
