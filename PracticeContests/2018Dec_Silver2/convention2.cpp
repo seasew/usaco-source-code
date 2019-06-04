@@ -51,7 +51,7 @@ int findBound(int time)
 {
 	// looks through the arrival times array using binary search
 	// find arrivals[i] >= time
-	int outI = -1;
+	int outI = -2;
 	bool found = false;
 	int startI = 0;
 	int endI = n - 1;
@@ -82,7 +82,7 @@ int findBound(int time)
 		}
 	}
 
-	return outI;
+	return outI + 1;
 }
 
 int main()
@@ -123,6 +123,7 @@ int main()
 	for (int i = 0; i < n; i++)
 	{
 		int sortedI = indexes[curI];
+		waiting_cows[sortedI] = false;
 		// update curTime
 		curTime += times[sortedI];
 
@@ -136,13 +137,23 @@ int main()
 		maxTime = std::max(maxTime, curTime - arrivals[sortedI]);
 
 		// figure out -- which cow should eat next?
-		// update sortedI
+		// update curI
 		// find the index of the smallest senority in the cows that are waiting
 		// find a cow that has true as waiting
-		// TODO
-
-
-		waiting_cows[sortedI] = false;
+		int minSenI = endWaitI;
+		for (int a = 0; a < endWaitI; a++)
+		{
+			// must be a waiting cow (value is true)
+			if (waiting_cows[indexes[minSenI]])
+			{
+				// compare its senority with the current min index
+				if (senority[indexes[a]] < senority[indexes[minSenI]])
+				{
+					minSenI = a;
+				}
+			}
+		}
+		curI = minSenI;
 	}
 
 	fout << maxTime << "\n";
