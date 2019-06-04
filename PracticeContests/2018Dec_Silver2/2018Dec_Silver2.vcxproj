@@ -115,6 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="convention2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="convention2.in" />
+    <None Include="convention2.out" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
