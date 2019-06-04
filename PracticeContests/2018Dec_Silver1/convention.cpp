@@ -133,7 +133,7 @@ int main()
 		}
 	}
 
-	fout << tPossible << "\n";
+	fout << doesTWork(tPossible) << "\n";
 
 	// Close Streams
 	fin.close();
