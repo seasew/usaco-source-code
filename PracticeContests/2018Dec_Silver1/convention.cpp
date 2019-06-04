@@ -94,26 +94,26 @@ int main()
 
 	// binary search
 	int tPossible;
-	int startI = 0;
-	int endI = n - 1;
+	int startT = 0;
+	int endT = cows_st[n - 1];
 	bool continueT = true;
 	while (continueT)
 	{
-		int curI = (startI + endI) / 2;
-		tPossible = doesTWork(cows_st[curI]);
+		int curT = (startT + endT) / 2;
+		tPossible = doesTWork(curT);
 
 		// is this the smallest possible time T?
 		// check if the search should continue
 		if (tPossible >= 0)
 		{
 			// do not continue if the currentPoint is possible, but (curPt - 1) is not possible
-			if (curI != 0 && doesTWork(cows_st[curI - 1]) < 0)
+			if (curT != cows_st[0] && doesTWork(curT - 1) < 0)
 			{
 				continueT = false;
 				break;
 			}
 			// or, current point is index 0
-			else if (curI == 0)
+			else if (curT == cows_st[0])
 			{
 				continueT = false;
 				break;
@@ -124,12 +124,12 @@ int main()
 		if (tPossible >= 0)
 		{
 			// decrease value
-			endI = curI;
+			endT = curT;
 		}
 		else
 		{
 			// increase value
-			startI = curI;
+			startT = curT;
 		}
 	}
 
