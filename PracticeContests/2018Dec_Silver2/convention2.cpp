@@ -20,7 +20,7 @@ int arrivals[100050];
 // the time spent grazing 
 int times[100050];
 // true if waiting, false if not
-bool waiting_cows[100050];
+bool waiting_cows[100050] = { true };
 // senority array
 int senority[100050];
 
@@ -75,23 +75,20 @@ int main()
 
 	// sort index array using custom method
 	std::sort(indexes, indexes + n, cmp);
-
+	
 	int curI = 0;
 	int maxTime = 0;
 	int curTime = arrivals[indexes[0]];
+	waiting_cows[0] = false;
 	// n cows will eat
 	for (int i = 0; i < n; i++)
 	{
 		// update curTime
 		curTime += times[indexes[curI]];
 
-		// the index of the beg of the range of waiting cows
-		int startWaitI;
-		// the index of the end of the range of waiting cows (exclusive)
 		int endWaitI;
-		// update waiting array based on the curTime
-		// for all cows with arrival time <= curTime
-		// change waiting to true
+		// find the upper index bound (exclusive) of the waiting cows
+		// cows with arrival times <= curTime
 		// TODO
 		
 		// compare ith cow's waiting time with maxTime
@@ -100,7 +97,12 @@ int main()
 		// figure out -- which cow should eat next?
 		// update curI
 		// find the index of the smallest senority in the cows that are waiting
-		curI = std::min_element(senority + startWaitI, senority + endWaitI) - std::begin(senority);
+		// find a cow that has true as waiting
+		while (!waiting_cows[curI])
+		{
+			// find the min element until it is true that it is waiting
+			curI = std::min_element(senority, senority + endWaitI) - std::begin(senority);
+		}
 		waiting_cows[curI] = false;
 	}
 
