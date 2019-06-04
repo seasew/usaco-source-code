@@ -39,7 +39,12 @@ int main()
 	}
 
 	// Read file
-
+	for (int i = 0; i < n; i++)
+	{
+		fin >> arrivals[i];
+		fin >> times[i];
+		senority[i] = i + 1;
+	}
 
 	// Close Streams
 	fin.close();
