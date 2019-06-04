@@ -85,17 +85,23 @@ int main()
 		// update curTime
 		curTime += times[indexes[curI]];
 
+		// the index of the beg of the range of waiting cows
+		int startWaitI;
+		// the index of the end of the range of waiting cows (exclusive)
+		int endWaitI;
 		// update waiting array based on the curTime
 		// for all cows with arrival time <= curTime
 		// change waiting to true
 		// TODO
-
+		
 		// compare ith cow's waiting time with maxTime
 		maxTime = std::max(maxTime, curTime - arrivals[indexes[curI]]);
 
 		// figure out -- which cow should eat next?
 		// update curI
-		// TODO
+		// find the index of the smallest senority in the cows that are waiting
+		curI = std::min_element(senority + startWaitI, senority + endWaitI) - std::begin(senority);
+		waiting_cows[curI] = false;
 	}
 
 	fout << maxTime << "\n";
