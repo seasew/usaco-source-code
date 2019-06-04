@@ -76,22 +76,26 @@ int main()
 	// sort index array using custom method
 	std::sort(indexes, indexes + n, cmp);
 
+	int curI = 0;
 	int maxTime = 0;
 	int curTime = arrivals[indexes[0]];
-	// look at each of the indexes in order of arrival time
+	// n cows will eat
 	for (int i = 0; i < n; i++)
 	{
 		// update curTime
-		curTime += times[indexes[0]];
+		curTime += times[indexes[curI]];
 
 		// update waiting array based on the curTime
 		// for all cows with arrival time <= curTime
 		// change waiting to true
+		// TODO
 
 		// compare ith cow's waiting time with maxTime
-		maxTime = std::max(maxTime, curTime - arrivals[indexes[i]]);
+		maxTime = std::max(maxTime, curTime - arrivals[indexes[curI]]);
 
 		// figure out -- which cow should eat next?
+		// update curI
+		// TODO
 	}
 
 	fout << maxTime << "\n";
