@@ -59,9 +59,11 @@ int findBound(int time)
 	{
 		int curI = (startI + endI) / 2;
 
+		int sortedI = indexes[curI];
+
 		// check if we need to continue searching
-		if ((arrivals[curI] >= time && curI == 0)
-			|| (arrivals[curI] >= time && arrivals[curI - 1] < time))
+		if ((arrivals[sortedI] >= time && sortedI == 0)
+			|| (arrivals[sortedI] >= time && arrivals[sortedI - 1] < time))
 		{
 			// this means we don't need to keep searching
 			outI = curI;
@@ -70,7 +72,7 @@ int findBound(int time)
 		}
 
 		// update the start and end pointers
-		if (arrivals[curI] >= time)
+		if (arrivals[sortedI] >= time)
 		{
 			endI = curI;
 		}
@@ -110,7 +112,7 @@ int main()
 		indexes[i] = i;
 	}
 
-	// sort index array using custom method
+	// sort index array by arrival times using custom method
 	std::sort(indexes, indexes + n, cmp);
 	
 	int curI = 0;
@@ -120,8 +122,9 @@ int main()
 	// n cows will eat
 	for (int i = 0; i < n; i++)
 	{
+		int sortedI = indexes[curI];
 		// update curTime
-		curTime += times[indexes[curI]];
+		curTime += times[sortedI];
 
 		int endWaitI;
 		// find the upper index bound (exclusive) of the waiting cows
@@ -130,18 +133,16 @@ int main()
 		endWaitI = findBound(curTime);
 		
 		// compare ith cow's waiting time with maxTime
-		maxTime = std::max(maxTime, curTime - arrivals[indexes[curI]]);
+		maxTime = std::max(maxTime, curTime - arrivals[sortedI]);
 
 		// figure out -- which cow should eat next?
-		// update curI
+		// update sortedI
 		// find the index of the smallest senority in the cows that are waiting
 		// find a cow that has true as waiting
-		while (!waiting_cows[curI])
-		{
-			// find the min element until it is true that it is waiting
-			curI = std::min_element(senority, senority + endWaitI) - std::begin(senority);
-		}
-		waiting_cows[curI] = false;
+		// TODO
+
+
+		waiting_cows[sortedI] = false;
 	}
 
 	fout << maxTime << "\n";
