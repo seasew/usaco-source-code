@@ -69,13 +69,24 @@ int main()
 	for (int i = 0; i < n; i++)
 	{
 		std::pair<int, std::pair<int, int>> curcow = queue.top();
+		int a = (curcow.second).first;
+		int t = curcow.first;
 		queue.pop();
+
+		// check if the curcow arrived before the prev cow finished grazing
+		if (a < curtime)
+		{
+			// keep track of the cows that have arrived before
+			// find the cow with the smallest senority
+			// idk
+		}
+		
 		// calculate the wait time between curtime and the cow's arrival time
 		// cmp to maxtime
-		maxtime = std::max(maxtime, curtime - (curcow.second).first);
+		maxtime = std::max(maxtime, curtime - a);
 
 		// add the amount of time this cow needs to graze to curtime
-		curtime += curcow.first;
+		curtime += t;
 
 	}
 
