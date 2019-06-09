@@ -17,7 +17,7 @@ PROB: convention2
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> arr;
+std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> queue;
 
 class Compare
 {
@@ -59,7 +59,22 @@ int main()
 		input = std::make_pair(t, other);
 
 		// push to priority queue
-		arr.push(input);
+		queue.push(input);
+	}
+
+	// walk through the sorted arr and calculate the waiting time for each cow
+	int maxtime = 0;
+	int curtime = 0;
+	for (int i = 0; i < n; i++)
+	{
+		std::pair<int, std::pair<int, int>> curcow = queue.top();
+		// calculate the wait time between curtime and the cow's arrival time
+		// cmp to maxtime
+		maxtime = std::max(maxtime, curtime - (curcow.second).first);
+
+		// add the amount of time this cow needs to graze to curtime
+		curtime += curcow.first;
+
 	}
 
 	// Close Streams
