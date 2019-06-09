@@ -20,7 +20,7 @@ class Compare
 public:
 	bool operator() (std::pair<int, std::pair<int, int>> c1, std::pair<int, std::pair<int, int>> c2)
 	{
-		return c1.second < c2.second;
+		return c1.second > c2.second;
 	}
 };
 
