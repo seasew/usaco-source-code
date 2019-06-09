@@ -14,10 +14,6 @@ PROB: convention2
 #include <queue>
 #include <utility>
 
-// num of cows
-int n;
-// pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> queue;
 
 class Compare
 {
@@ -27,6 +23,11 @@ public:
 		return c1.second < c2.second;
 	}
 };
+
+// num of cows
+int n;
+// pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
+std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> queue;
 
 
 int main()
@@ -76,6 +77,9 @@ int main()
 		curtime += curcow.first;
 
 	}
+
+	// output to file
+	fout << maxtime;
 
 	// Close Streams
 	fin.close();
