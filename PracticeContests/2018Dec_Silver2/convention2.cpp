@@ -65,10 +65,11 @@ int main()
 
 	// walk through the sorted arr and calculate the waiting time for each cow
 	int maxtime = 0;
-	int curtime = 0;
+	int curtime = queue.top().second.first;
 	for (int i = 0; i < n; i++)
 	{
 		std::pair<int, std::pair<int, int>> curcow = queue.top();
+		queue.pop();
 		// calculate the wait time between curtime and the cow's arrival time
 		// cmp to maxtime
 		maxtime = std::max(maxtime, curtime - (curcow.second).first);
