@@ -17,7 +17,17 @@ PROB: convention2
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<std::pair<int, std::pair<int, int>>> arr;
+std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> arr;
+
+class Compare
+{
+public:
+	bool operator() (std::pair<int, std::pair<int, int>> c1, std::pair<int, std::pair<int, int>> c2)
+	{
+		return c1.second < c2.second;
+	}
+};
+
 
 int main()
 {
