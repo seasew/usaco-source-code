@@ -13,6 +13,7 @@ PROB: convention2
 #include <functional>
 #include <queue>
 #include <utility>
+#include <set>
 
 
 class Compare
@@ -66,6 +67,8 @@ int main()
 	// walk through the sorted arr and calculate the waiting time for each cow
 	int maxtime = 0;
 	int curtime = queue.top().second.first;
+
+	std::set<std::pair<int, std::pair<int, int>>, CompareWaiting> waiting_cows;
 	for (int i = 0; i < n; i++)
 	{
 		std::pair<int, std::pair<int, int>> curcow = queue.top();
@@ -73,14 +76,6 @@ int main()
 		int t = curcow.first;
 		queue.pop();
 
-		// check if the curcow arrived before the prev cow finished grazing
-		if (a < curtime)
-		{
-			// keep track of the cows that have arrived before
-			// find the cow with the smallest senority
-			// idk
-		}
-		
 		// calculate the wait time between curtime and the cow's arrival time
 		// cmp to maxtime
 		maxtime = std::max(maxtime, curtime - a);
@@ -88,6 +83,14 @@ int main()
 		// add the amount of time this cow needs to graze to curtime
 		curtime += t;
 
+		// what range of cows arrived after curcow but before (curcow + a)--> curtime
+		while (queue.top().second.first > a && queue.top().second.first <= curtime)
+		{
+			// add the top to the ordered set
+			// pop it off to prepare to check the next cow
+		}
+
+		// push the ordered set to the queue
 	}
 
 	// output to file
