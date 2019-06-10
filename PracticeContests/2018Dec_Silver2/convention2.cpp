@@ -25,6 +25,16 @@ public:
 	}
 };
 
+class CompareWaiting
+{
+public:
+	bool operator() (std::pair<int, std::pair<int, int>> c1, std::pair<int, std::pair<int, int>> c2)
+	{
+		// cmp senorities from smallest to largest
+		return c1.second.second < c2.second.second;
+	}
+};
+
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
@@ -89,7 +99,7 @@ int main()
 			// add the top to the ordered set
 			waiting_cows.insert(queue.top());
 			// pop it off to prepare to check the next cow
-			queue.pop()
+			queue.pop();
 		}
 
 		// push the ordered set (smallest to largest) to the queue (largest first)
