@@ -87,10 +87,16 @@ int main()
 		while (queue.top().second.first > a && queue.top().second.first <= curtime)
 		{
 			// add the top to the ordered set
+			waiting_cows.insert(queue.top());
 			// pop it off to prepare to check the next cow
+			queue.pop()
 		}
 
-		// push the ordered set to the queue
+		// push the ordered set (smallest to largest) to the queue (largest first)
+		for (int i = 0; i < waiting_cows.size; i++)
+		{
+			queue.push(waiting_cows.end - i);
+		}
 	}
 
 	// output to file
