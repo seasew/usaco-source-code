@@ -15,11 +15,13 @@ PROB: convention2
 #include <utility>
 #include <set>
 
+typedef std::pair<int, std::pair<int, int>> cowinfo;
+typedef std::pair<int, cowinfo> finalcow;
 
 class Compare
 {
 public:
-	bool operator() (std::pair<int, std::pair<int, int>> c1, std::pair<int, std::pair<int, int>> c2)
+	bool operator() (cowinfo c1, cowinfo c2)
 	{
 		return c1.second > c2.second;
 	}
@@ -28,7 +30,7 @@ public:
 class CompareWaiting
 {
 public:
-	bool operator() (std::pair<int, std::pair<int, int>> c1, std::pair<int, std::pair<int, int>> c2)
+	bool operator() (cowinfo c1, cowinfo c2)
 	{
 		// cmp senorities from smallest to largest
 		return c1.second.second < c2.second.second;
@@ -38,7 +40,11 @@ public:
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, Compare> queue;
+std::priority_queue<cowinfo, Compare> orig_cows;
+
+std::priority_queue<finalcow, CompareWaiting> waiting_cows;
+
+finalcow final_order[];
 
 
 int main()
@@ -71,46 +77,10 @@ int main()
 		input = std::make_pair(t, other);
 
 		// push to priority queue
-		queue.push(input);
+		orig_cows.push(input);
 	}
 
-	// walk through the sorted arr and calculate the waiting time for each cow
-	int maxtime = 0;
-	int curtime = queue.top().second.first;
-
-	std::set<std::pair<int, std::pair<int, int>>, CompareWaiting> waiting_cows;
-	for (int i = 0; i < n; i++)
-	{
-		std::pair<int, std::pair<int, int>> curcow = queue.top();
-		int a = (curcow.second).first;
-		int t = curcow.first;
-		queue.pop();
-
-		// calculate the wait time between curtime and the cow's arrival time
-		// cmp to maxtime
-		maxtime = std::max(maxtime, curtime - a);
-
-		// add the amount of time this cow needs to graze to curtime
-		curtime += t;
-
-		// what range of cows arrived after curcow but before (curcow + a)--> curtime
-		while (queue.top().second.first > a && queue.top().second.first <= curtime)
-		{
-			// add the top to the ordered set
-			waiting_cows.insert(queue.top());
-			// pop it off to prepare to check the next cow
-			queue.pop();
-		}
-
-		// push the ordered set (smallest to largest) to the queue (largest first)
-		for (int i = 0; i < waiting_cows.size; i++)
-		{
-			queue.push(waiting_cows.end - i);
-		}
-	}
-
-	// output to file
-	fout << maxtime;
+	
 
 	// Close Streams
 	fin.close();
