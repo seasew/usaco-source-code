@@ -15,7 +15,9 @@ PROB: convention2
 #include <utility>
 #include <set>
 
+// .first = amount of time spent grazing, .second = (.first = arrival, .second = senority)
 typedef std::pair<int, std::pair<int, int>> cowinfo;
+// .first = actual time that the cow started grazing, .second = cowinfo
 typedef std::pair<int, cowinfo> finalcow;
 
 class Compare
@@ -80,7 +82,7 @@ int main()
 		orig_cows.push(input);
 	}
 
-	
+	int curtime = orig_cows.top.first.first;
 
 	// Close Streams
 	fin.close();
