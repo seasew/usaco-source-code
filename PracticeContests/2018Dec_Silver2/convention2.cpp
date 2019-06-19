@@ -112,11 +112,17 @@ int main()
 		}
 
 		// add all the new waiting cows to waiting_cows
+		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
+		int starttime = curtime;
+		// update curtime
+		curtime += processcow.first;
+		while (!orig_cows.empty && orig_cows.top.first.first >= starttime && orig_cows.top.first.first <= curtime)
+		{
+			
+		}
 
 		// update index
 		index++;
-		// update curtime
-		curtime += processcow.first;
 	}
 
 	// Close Streams
