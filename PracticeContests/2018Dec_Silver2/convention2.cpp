@@ -97,21 +97,26 @@ int main()
 			// process the top cow in orig_cows
 			// add the top cow to the final order
 			// create a finalcow type from the cowinfo of top cow
-			finalcow topfinalcow = std::make_pair(curtime, curcow);
+			finalcow topfinalcow = std::make_pair(curtime, processcow);
 			final_order[index] = topfinalcow;
-			// update index
-			index++;
-			// update curtime
-			curtime += curcow.first;
 		}
 		// if there are waiting cows
 		else
 		{
-			// proccess the next waiting cow
+			// process the next waiting cow
 			processcow = waiting_cows.top;
+			waiting_cows.pop;
+			// add the processcow to the final order
+			finalcow topfinalcow = std::make_pair(curtime, processcow);
+			final_order[index] = topfinalcow;
 		}
 
 		// add all the new waiting cows to waiting_cows
+
+		// update index
+		index++;
+		// update curtime
+		curtime += processcow.first;
 	}
 
 	// Close Streams
