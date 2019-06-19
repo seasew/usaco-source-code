@@ -116,9 +116,12 @@ int main()
 		int starttime = curtime;
 		// update curtime
 		curtime += processcow.first;
+
 		while (!orig_cows.empty && orig_cows.top.first.first >= starttime && orig_cows.top.first.first <= curtime)
 		{
-			
+			// then orig_cows.top is a waiting_cow now
+			waiting_cows.push(orig_cows.top);
+			orig_cows.pop;
 		}
 
 		// update index
