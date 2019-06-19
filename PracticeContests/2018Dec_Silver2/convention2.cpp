@@ -82,7 +82,12 @@ int main()
 		orig_cows.push(input);
 	}
 
-	int curtime = orig_cows.top.first.first;
+	// set curtime to the arrival time of the 1st cow
+	int curtime = orig_cows.top.second.first;
+	while (!orig_cows.empty)
+	{
+
+	}
 
 	// Close Streams
 	fin.close();
