@@ -87,13 +87,14 @@ int main()
 	int index = 0;
 	while (!orig_cows.empty)
 	{
+		cowinfo processcow;
 		// if there are no waiting cows
-		// proccess the next cow in orig_cows
+		// process the next cow in orig_cows
 		if (waiting_cows.empty)
 		{
-			cowinfo curcow = orig_cows.top;
+			processcow = orig_cows.top;
 			orig_cows.pop;
-			// proccess the top cow in orig_cows
+			// process the top cow in orig_cows
 			// add the top cow to the final order
 			// create a finalcow type from the cowinfo of top cow
 			finalcow topfinalcow = std::make_pair(curtime, curcow);
@@ -102,12 +103,12 @@ int main()
 			index++;
 			// update curtime
 			curtime += curcow.first;
-
 		}
 		// if there are waiting cows
 		else
 		{
 			// proccess the next waiting cow
+			processcow = waiting_cows.top;
 		}
 
 		// add all the new waiting cows to waiting_cows
