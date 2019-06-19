@@ -46,7 +46,7 @@ std::priority_queue<cowinfo, Compare> orig_cows;
 
 std::priority_queue<finalcow, CompareWaiting> waiting_cows;
 
-finalcow final_order[];
+finalcow final_order[100000];
 
 
 int main()
@@ -84,9 +84,16 @@ int main()
 
 	// set curtime to the arrival time of the 1st cow
 	int curtime = orig_cows.top.second.first;
+	int index = 0;
 	while (!orig_cows.empty)
 	{
-
+		// proccess the top cow in orig_cows
+		// add the top cow to the final order
+		// create a finalcow type from the cowinfo of top cow
+		finalcow topfinalcow = std::make_pair(curtime, orig_cows.top);
+		final_order[index] = topfinalcow;
+		// update index
+		index++;
 	}
 
 	// Close Streams
