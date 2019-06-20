@@ -22,7 +22,9 @@ typedef std::pair<int, cowinfo> finalcow;
 
 class Compare
 {
+
 public:
+	typedef cowinfo value_type;
 	bool operator() (cowinfo c1, cowinfo c2)
 	{
 		return c1.second > c2.second;
