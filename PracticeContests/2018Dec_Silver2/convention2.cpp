@@ -25,6 +25,8 @@ class Compare
 
 public:
 	typedef cowinfo value_type;
+	typedef cowinfo const_reference_type;
+
 	bool operator() (cowinfo c1, cowinfo c2)
 	{
 		return c1.second > c2.second;
@@ -34,6 +36,9 @@ public:
 class CompareWaiting
 {
 public:
+	typedef cowinfo value_type;
+	typedef cowinfo const_reference_type;
+
 	bool operator() (cowinfo c1, cowinfo c2)
 	{
 		// cmp senorities from smallest to largest
