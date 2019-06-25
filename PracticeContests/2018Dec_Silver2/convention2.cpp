@@ -43,7 +43,7 @@ int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
 std::priority_queue<cowinfo, std::vector<cowinfo>, Compare> orig_cows;
 
-std::priority_queue<finalcow, std::vector<cowinfo>, CompareWaiting> waiting_cows;
+std::priority_queue<cowinfo, std::vector<cowinfo>, CompareWaiting> waiting_cows;
 
 finalcow final_order[100000];
 
