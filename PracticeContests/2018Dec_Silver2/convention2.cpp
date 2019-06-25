@@ -20,23 +20,28 @@ typedef std::pair<int, std::pair<int, int>> cowinfo;
 // .first = actual time that the cow started grazing, .second = cowinfo
 typedef std::pair<int, cowinfo> finalcow;
 
-
-bool Compare(cowinfo c1, cowinfo c2)
+struct Compare
 {
-	return c1.second > c2.second;
-}
+	bool operator() (cowinfo c1, cowinfo c2)
+	{
+		return c1.second > c2.second;
+	}
+};
 
-bool CompareWaiting(cowinfo c1, cowinfo c2)
+struct CompareWaiting
 {
-	// cmp senorities from smallest to largest
-	return c1.second.second < c2.second.second;
-}
+	bool operator() (cowinfo c1, cowinfo c2)
+	{
+		// cmp senorities from smallest to largest
+		return c1.second.second < c2.second.second;
+	}
+};
 
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<cowinfo, std::vector<cowinfo>, decltype(&Compare)> orig_cows(Compare);
-std::priority_queue<cowinfo, std::vector<cowinfo>, decltype(&CompareWaiting)> waiting_cows(CompareWaiting);
+std::set <cowinfo, std::vector<cowinfo>, Compare> orig_cows;
+std::set <cowinfo, std::vector<cowinfo>, CompareWaiting> waiting_cows;
 
 finalcow final_order[100000];
 
@@ -71,21 +76,21 @@ int main()
 		input = std::make_pair(t, other);
 
 		// push to priority queue
-		orig_cows.push(input);
+		orig_cows.insert(input);
 	}
 
 	// set curtime to the arrival time of the 1st cow
-	int curtime = orig_cows.top.second.first;
+	int curtime = orig_cows.begin.second.first;
 	int index = 0;
-	while (!orig_cows.empty)
+	while (!(orig_cows.empty))
 	{
 		cowinfo processcow;
 		// if there are no waiting cows
 		// process the next cow in orig_cows
 		if (waiting_cows.empty)
 		{
-			processcow = orig_cows.top;
-			orig_cows.pop;
+			processcow = orig_cows.begin;
+			orig_cows.erase(orig_cows.begin);
 			// process the top cow in orig_cows
 			// add the top cow to the final order
 			// create a finalcow type from the cowinfo of top cow
@@ -96,8 +101,8 @@ int main()
 		else
 		{
 			// process the next waiting cow
-			processcow = waiting_cows.top;
-			waiting_cows.pop;
+			processcow = waiting_cows.begin;
+			waiting_cows.erase(waiting_cows.begin);
 			// add the processcow to the final order
 			finalcow topfinalcow = std::make_pair(curtime, processcow);
 			final_order[index] = topfinalcow;
@@ -109,11 +114,11 @@ int main()
 		// update curtime
 		curtime += processcow.first;
 
-		while (!orig_cows.empty && orig_cows.top.first.first >= starttime && orig_cows.top.first.first <= curtime)
+		while (!orig_cows.empty && orig_cows.begin.first.first >= starttime && orig_cows.begin.first.first <= curtime)
 		{
 			// then orig_cows.top is a waiting_cow now
-			waiting_cows.push(orig_cows.top);
-			orig_cows.pop;
+			waiting_cows.insert(orig_cows.begin);
+			orig_cows.erase(orig_cows.begin);
 		}
 
 		// update index
