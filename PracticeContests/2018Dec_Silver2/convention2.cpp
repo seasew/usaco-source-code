@@ -20,38 +20,25 @@ typedef std::pair<int, std::pair<int, int>> cowinfo;
 // .first = actual time that the cow started grazing, .second = cowinfo
 typedef std::pair<int, cowinfo> finalcow;
 
-class Compare
+bool Compare (cowinfo c1, cowinfo c2)
 {
+	return c1.second > c2.second;
+}
 
-public:
-	typedef cowinfo value_type;
-	typedef cowinfo const_reference_type;
 
-	bool operator() (cowinfo c1, cowinfo c2)
-	{
-		return c1.second > c2.second;
-	}
-};
-
-class CompareWaiting
+bool CompareWaiting (cowinfo c1, cowinfo c2)
 {
-public:
-	typedef cowinfo value_type;
-	typedef cowinfo const_reference_type;
+	// cmp senorities from smallest to largest
+	return c1.second.second < c2.second.second;
+}
 
-	bool operator() (cowinfo c1, cowinfo c2)
-	{
-		// cmp senorities from smallest to largest
-		return c1.second.second < c2.second.second;
-	}
-};
 
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::priority_queue<cowinfo, Compare> orig_cows;
+std::priority_queue<cowinfo, std::vector<cowinfo>, std::function<bool (cowinfo, cowinfo)>> orig_cows(Compare);
 
-std::priority_queue<finalcow, CompareWaiting> waiting_cows;
+std::priority_queue<finalcow, std::vector<cowinfo>, std::function<bool(cowinfo, cowinfo)>> waiting_cows(Compare);
 
 finalcow final_order[100000];
 
