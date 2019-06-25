@@ -40,8 +40,8 @@ struct CompareWaiting
 // num of cows
 int n;
 // pair is t (amount of time eating grass) & a pair--(a -starting time of grass eating, senority)
-std::set <cowinfo, std::vector<cowinfo>, Compare> orig_cows;
-std::set <cowinfo, std::vector<cowinfo>, CompareWaiting> waiting_cows;
+std::set <cowinfo, Compare> orig_cows;
+std::set <cowinfo, CompareWaiting> waiting_cows;
 
 finalcow final_order[100000];
 
