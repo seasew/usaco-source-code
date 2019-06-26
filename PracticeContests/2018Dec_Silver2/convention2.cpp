@@ -87,7 +87,8 @@ int main()
 		else
 		{
 			// process the next waiting cow
-			processcow = waiting_cows.begin;
+			// set process cow to corresponding cow in orig_cows
+			processcow = orig_cows[waiting_cows.begin];
 			waiting_cows.erase(waiting_cows.begin);
 		}
 
