@@ -64,7 +64,7 @@ int main()
 	}
 
 	// sort the sorted_cows ascending
-	std::sort(std::begin(sorted_cows), std::end(sorted_cows));
+	std::sort(std::begin(sorted_cows), std::begin(sorted_cows) + n);
 
 	// set curtime to the arrival time of the 1st cow
 	int curtime = sorted_cows[0].first;
