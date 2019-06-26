@@ -73,21 +73,20 @@ int main()
 	while (scindex < n)
 	{
 		cowinfo processcow;
+
 		// if there are no waiting cows
-		// process the next cow in sorted_cows
 		if (waiting_cows.empty)
 		{
+			// process the next cow in sorted_cows
 			processcow = sorted_cows[scindex];
 		}
+
 		// if there are waiting cows
 		else
 		{
 			// process the next waiting cow
 			processcow = waiting_cows.begin;
 			waiting_cows.erase(waiting_cows.begin);
-			// add the processcow to the final order
-			finalcow topfinalcow = std::make_pair(curtime, processcow);
-			final_order[index] = topfinalcow;
 		}
 
 		// add all the new waiting cows to waiting_cows
