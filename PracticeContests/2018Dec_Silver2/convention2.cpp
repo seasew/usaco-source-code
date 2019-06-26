@@ -27,7 +27,6 @@ cowinfo sorted_cows[100000];
 // std::set that sorts by senority
 std::set <int> waiting_cows;
 
-
 int main()
 {
 	// Open Streams
@@ -53,12 +52,12 @@ int main()
 		int a, t;
 		fin >> a >> t;
 		std::pair <int, std::pair<int, int>> input;
-		std::pair <int, int> other;
-		other = std::make_pair(a, i);
-		input = std::make_pair(t, other);
 
-		// push to priority queue
-		orig_cows.insert(input);
+		// other is (senority 0-based, amount of time)
+		std::pair <int, int> other;
+		other = std::make_pair(i, t);
+
+		input = std::make_pair(a, other);
 	}
 
 	// set curtime to the arrival time of the 1st cow
