@@ -95,21 +95,22 @@ int main()
 		// find the wait time of processcow and cmp with current max
 		maxtime = std::max(maxtime, curtime - processcow.first);
 
+		// update index
+		scindex++;
+
 		// add all the new waiting cows to waiting_cows
 		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
 		int starttime = curtime;
-		// update curtime
-		curtime += processcow.first;
+		// update curtime (add the amount of time spent grazing)
+		curtime += processcow.second.first;
 
-		while (!orig_cows.empty && orig_cows.begin.first.first >= starttime && orig_cows.begin.first.first <= curtime)
+		int i = scindex;
+		while (sorted_cows[scindex] >= starttime && orig_cows.begin.first.first <= curtime)
 		{
 			// then orig_cows.top is a waiting_cow now
 			waiting_cows.insert(orig_cows.begin);
 			orig_cows.erase(orig_cows.begin);
 		}
-
-		// update index
-		index++;
 	}
 
 	// find the max waiting time of the cows in final_order
