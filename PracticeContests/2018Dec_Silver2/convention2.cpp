@@ -108,9 +108,11 @@ int main()
 		// did the cow at index i arrive while the processed cow was eating?
 		while ((i < n) && (sorted_cows[i].first >= starttime) && (sorted_cows[i].first <= curtime))
 		{
-			// then orig_cows.top is a waiting_cow now
-			waiting_cows.insert(orig_cows.begin);
-			orig_cows.erase(orig_cows.begin);
+			// then sorted_cows[i] is a waiting_cow now
+			// insert its senority
+			waiting_cows.insert(sorted_cows[i].second.first);
+
+			i++;
 		}
 	}
 
