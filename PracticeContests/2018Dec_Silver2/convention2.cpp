@@ -58,6 +58,9 @@ int main()
 		other = std::make_pair(i, t);
 
 		input = std::make_pair(a, other);
+		// set input in orig_cows and sorted_cows
+		orig_cows[i] = input;
+		sorted_cows[i] = input;
 	}
 
 	// set curtime to the arrival time of the 1st cow
