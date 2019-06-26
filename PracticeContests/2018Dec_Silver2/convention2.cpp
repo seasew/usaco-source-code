@@ -77,7 +77,7 @@ int main()
 		cowinfo processcow;
 
 		// if there are no waiting cows
-		if (waiting_cows.empty)
+		if (waiting_cows.empty())
 		{
 			// process the next cow in sorted_cows
 			processcow = sorted_cows[scindex];
@@ -88,8 +88,8 @@ int main()
 		{
 			// process the next waiting cow
 			// set process cow to corresponding cow in orig_cows
-			processcow = orig_cows[waiting_cows.begin];
-			waiting_cows.erase(waiting_cows.begin);
+			processcow = orig_cows[*waiting_cows.begin()];
+			waiting_cows.erase(waiting_cows.begin());
 		}
 
 		// now, actually process the cow
