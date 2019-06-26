@@ -78,12 +78,6 @@ int main()
 		if (waiting_cows.empty)
 		{
 			processcow = sorted_cows[scindex];
-			
-			// process the top cow in orig_cows
-			// add the top cow to the final order
-			// create a finalcow type from the cowinfo of top cow
-			finalcow topfinalcow = std::make_pair(curtime, processcow);
-			final_order[index] = topfinalcow;
 		}
 		// if there are waiting cows
 		else
