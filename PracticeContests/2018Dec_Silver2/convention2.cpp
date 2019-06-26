@@ -20,7 +20,7 @@ typedef std::pair<int, std::pair<int, int>> cowinfo;
 
 // num of cows
 int n;
-// the original order of cows
+// the original order of cows (only used to lookup waitingcows by senority)
 cowinfo orig_cows[100000];
 // a sorted version of orig_cows (by arrival time, tie-break by senority)
 cowinfo sorted_cows[100000];
@@ -63,18 +63,22 @@ int main()
 		sorted_cows[i] = input;
 	}
 
+	// sort the sorted_cows ascending
+	std::sort(std::begin(sorted_cows), std::end(sorted_cows));
+
 	// set curtime to the arrival time of the 1st cow
-	int curtime = orig_cows.begin.second.first;
-	int index = 0;
-	while (!(orig_cows.empty))
+	int curtime = sorted_cows[0].first;
+	// updated when cows get processed
+	int scindex = 0;
+	while (scindex < n)
 	{
 		cowinfo processcow;
 		// if there are no waiting cows
-		// process the next cow in orig_cows
+		// process the next cow in sorted_cows
 		if (waiting_cows.empty)
 		{
-			processcow = orig_cows.begin;
-			orig_cows.erase(orig_cows.begin);
+			processcow = sorted_cows[scindex];
+			
 			// process the top cow in orig_cows
 			// add the top cow to the final order
 			// create a finalcow type from the cowinfo of top cow
