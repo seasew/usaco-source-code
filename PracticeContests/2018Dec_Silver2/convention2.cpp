@@ -114,6 +114,9 @@ int main()
 
 			i++;
 		}
+
+		// update scindex (add the number of newly arrived cows)
+		scindex += scindex - i;
 	}
 
 	fout << maxtime;
