@@ -116,14 +116,7 @@ int main()
 		}
 	}
 
-	// find the max waiting time of the cows in final_order
-	int max;
-	for (int i = 0; i < index; i++)
-	{
-		max = std::max(max, final_order[i].first - final_order[i].second.second.first);
-	}
-
-	fout << max;
+	fout << maxtime;
 
 	// Close Streams
 	fin.close();
