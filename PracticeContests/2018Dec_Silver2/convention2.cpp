@@ -120,7 +120,7 @@ int main()
 		scindex += i - scindex;
 	}
 
-	fout << maxtime;
+	fout << maxtime << "\n";
 
 	// Close Streams
 	fin.close();
