@@ -77,10 +77,13 @@ int main()
 		cowinfo processcow;
 
 		// if there are no waiting cows
-		if (waiting_cows.empty())
+ 		if (waiting_cows.empty())                                                                                                        
 		{
 			// process the next cow in sorted_cows
 			processcow = sorted_cows[scindex];
+
+			// reset the curtime to processcow's arrival time 
+			curtime = processcow.first;
 		}
 
 		// if there are waiting cows
