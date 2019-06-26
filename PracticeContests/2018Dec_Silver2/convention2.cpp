@@ -105,7 +105,8 @@ int main()
 		curtime += processcow.second.first;
 
 		int i = scindex;
-		while (sorted_cows[scindex] >= starttime && orig_cows.begin.first.first <= curtime)
+		// did the cow at index i arrive while the processed cow was eating?
+		while ((i < n) && (sorted_cows[i].first >= starttime) && (sorted_cows[i].first <= curtime))
 		{
 			// then orig_cows.top is a waiting_cow now
 			waiting_cows.insert(orig_cows.begin);
