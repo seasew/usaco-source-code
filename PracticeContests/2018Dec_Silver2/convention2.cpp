@@ -103,7 +103,7 @@ int main()
 		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
 		int starttime = curtime;
 		// update curtime (add the amount of time spent grazing)
-		curtime += processcow.second.first;
+		curtime += processcow.second.second;
 
 		int i = scindex;
 		// did the cow at index i arrive while the processed cow was eating?
