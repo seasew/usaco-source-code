@@ -70,6 +70,8 @@ int main()
 	int curtime = sorted_cows[0].first;
 	// updated when cows get processed
 	int scindex = 0;
+	// current max wait time
+	int maxtime = 0;
 	while (scindex < n)
 	{
 		cowinfo processcow;
@@ -88,6 +90,10 @@ int main()
 			processcow = waiting_cows.begin;
 			waiting_cows.erase(waiting_cows.begin);
 		}
+
+		// now, actually process the cow
+		// find the wait time of processcow and cmp with current max
+		maxtime = std::max(maxtime, curtime - processcow.first);
 
 		// add all the new waiting cows to waiting_cows
 		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
