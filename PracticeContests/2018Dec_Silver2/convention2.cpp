@@ -76,7 +76,7 @@ int main()
 	{
 		// add all the new waiting cows to waiting_cows
 		// if the cow's arrival time is >=starttime and <=finishedtime, then it is now waiting
-		int starttime = finishedtime - sorted_cows[scindex].second.second;
+		int starttime = finishedtime;
 		// update curtime (add the amount of time spent grazing)
 		finishedtime += sorted_cows[scindex].second.second;
 
