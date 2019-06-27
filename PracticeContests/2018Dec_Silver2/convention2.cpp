@@ -67,31 +67,16 @@ int main()
 	std::sort(std::begin(sorted_cows), std::begin(sorted_cows) + n);
 
 	// set curtime to the arrival time of the 1st cow
-	int finishedtime = sorted_cows[0].first;
+	int curtime = sorted_cows[0].first;
 	// updated when cows get processed
 	int scindex = 0;
 	// current max wait time
 	int maxtime = 0;
 	while (scindex < n)
 	{
-		// add all the new waiting cows to waiting_cows
-		// if the cow's arrival time is >=starttime and <=finishedtime, then it is now waiting
-		int starttime = finishedtime;
-		// update curtime (add the amount of time spent grazing)
-		finishedtime += sorted_cows[scindex].second.second;
-
-		int i = scindex;
-		// did the cow at index i arrive while the processed cow was eating?
-		while ((i < n) && (sorted_cows[i].first >= starttime) && (sorted_cows[i].first <= finishedtime))
-		{
-			// then sorted_cows[i] is a waiting_cow now
-			// insert its senority
-			waiting_cows.insert(sorted_cows[i].second.first);
-
-			i++;
-		}
-
 		cowinfo processcow;
+
+		int starttime = curtime;
 
 		// if there are no waiting cows
 		if (waiting_cows.empty())
@@ -100,7 +85,7 @@ int main()
 			processcow = sorted_cows[scindex];
 
 			// reset the curtime to processcow's arrival time 
-			finishedtime = processcow.first;
+			curtime = processcow.first + processcow.second.second;
 		}
 
 		// if there are waiting cows
@@ -108,17 +93,33 @@ int main()
 		{
 			// process the next waiting cow
 			// set process cow to corresponding cow in orig_cows
-			processcow = orig_cows[*waiting_cows.begin()];
+			std::set<int>::iterator processit = waiting_cows.begin();
+ 			processcow = orig_cows[*processit];
 			waiting_cows.erase(waiting_cows.begin());
+
+			// find the wait time of processcow and cmp with current max
+			maxtime = std::max(maxtime, curtime - processcow.first);
+
+			// update curtime
+			curtime += processcow.second.second;
 		}
 
-
+		// add all the new waiting cows to waiting_cows
+		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
+		
 		// update scindex
 		scindex++;
+		int i = scindex;
+		// did the cow at index i arrive while the processed cow was eating?
+		while ((i < n) && (sorted_cows[i].first >= starttime) && (sorted_cows[i].first <= curtime))
+		{
+			// then sorted_cows[i] is a waiting_cow now
+			// insert its senority
+			waiting_cows.insert(sorted_cows[i].second.first);
 
-		// now, actually process the cow
-		// find the wait time of processcow and cmp with current max
-		maxtime = std::max(maxtime, finishedtime - processcow.second.second);
+			i++;
+		}
+
 	}
 
 	fout << maxtime << "\n";
