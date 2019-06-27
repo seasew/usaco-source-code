@@ -84,6 +84,9 @@ int main()
 
 			// reset the curtime to processcow's arrival time 
 			curtime = processcow.first;
+
+			// update index
+			scindex++;
 		}
 
 		// if there are waiting cows
@@ -98,9 +101,6 @@ int main()
 		// now, actually process the cow
 		// find the wait time of processcow and cmp with current max
 		maxtime = std::max(maxtime, curtime - processcow.first);
-
-		// update index
-		scindex++;
 
 		// add all the new waiting cows to waiting_cows
 		// if the cow's arrival time is >=starttime and <=curtime, then it is now waiting
