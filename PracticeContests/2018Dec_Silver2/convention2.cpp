@@ -77,16 +77,13 @@ int main()
 		cowinfo processcow;
 
 		// if there are no waiting cows
- 		if (waiting_cows.empty())                                                                                                        
+		if (waiting_cows.empty())
 		{
 			// process the next cow in sorted_cows
 			processcow = sorted_cows[scindex];
 
 			// reset the curtime to processcow's arrival time 
 			curtime = processcow.first;
-
-			// update index
-			scindex++;
 		}
 
 		// if there are waiting cows
@@ -97,6 +94,10 @@ int main()
 			processcow = orig_cows[*waiting_cows.begin()];
 			waiting_cows.erase(waiting_cows.begin());
 		}
+
+
+		// update scindex
+		scindex++;
 
 		// now, actually process the cow
 		// find the wait time of processcow and cmp with current max
@@ -119,8 +120,6 @@ int main()
 			i++;
 		}
 
-		// update scindex (add the number of newly arrived cows)
-		scindex += i - scindex;
 	}
 
 	fout << maxtime << "\n";
