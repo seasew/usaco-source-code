@@ -53,14 +53,23 @@ int main()
 		}
 	}
 
-	// turn blobs into zeros for each of the 9 colors
-	for (int i = 1; i <= 9; i++)
+	bool hasBlobs = true;
+
+	while (hasBlobs)
 	{
-		labelBlobs(i);
+		// turn blobs into zeros for each of the 9 colors
+		for (int i = 1; i <= 9; i++)
+		{
+			hasBlobs = labelBlobs(i);
+		}
+
+		// only continue if there are blobs, otherwise the while loop exits
+		if (hasBlobs)
+		{
+
+			// gravity
+		}
 	}
-
-	// gravity
-
 
 	// write to file
 
