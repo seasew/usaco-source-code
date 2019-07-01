@@ -38,6 +38,14 @@ int main()
 	}
 
 	// read file
+	fin >> n >> k;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			fin >> board[i][j];
+		}
+	}
 
 	// write to file
 
