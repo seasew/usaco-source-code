@@ -21,8 +21,8 @@ int k;
 // contains numbers 0-9 representing the board
 int board[10][150];
 
-// turn blobs with color key and size at least k into zeros
-void labelBlobs(int key)
+// turn blobs with color key and size at least k into zeros, return true if there were valid blobs
+bool labelBlobs(int key)
 {
 	
 }
@@ -58,6 +58,9 @@ int main()
 	{
 		labelBlobs(i);
 	}
+
+	// gravity
+
 
 	// write to file
 
