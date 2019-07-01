@@ -21,6 +21,12 @@ int k;
 // contains numbers 0-9 representing the board
 int board[10][150];
 
+// turn blobs with color key and size at least k into zeros
+void labelBlobs(int key)
+{
+	
+}
+
 int main()
 {
 	// Open Streams
@@ -45,6 +51,12 @@ int main()
 		{
 			fin >> board[i][j];
 		}
+	}
+
+	// turn blobs into zeros for each of the 9 colors
+	for (int i = 1; i <= 9; i++)
+	{
+		labelBlobs(i);
 	}
 
 	// write to file
