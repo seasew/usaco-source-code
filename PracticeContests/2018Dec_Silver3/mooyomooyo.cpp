@@ -66,13 +66,18 @@ int main()
 		// only continue if there are blobs, otherwise the while loop exits
 		if (hasBlobs)
 		{
-
 			// gravity
 		}
 	}
 
 	// write to file
-	for (int i = 0; i < 1)
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			fout << board[i][j];
+		}
+	}
 
 	// Close Streams
 	fin.close();
