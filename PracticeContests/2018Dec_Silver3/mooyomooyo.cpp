@@ -71,12 +71,23 @@ bool labelBlobs(int key)
 	while (curblob.size() > 0)
 	{
 		// floodfill the first key color found in board
-		int i;
-		for (i = 0; i < 10; i++)
+		
+		bool continue_search = true;
+		// find the first occurence of key color with the checked value false
+		while (continue_search)
 		{
-			for (int j = 0; j < n; j++)
+			auto it = std::find(std::begin(board), std::end(board), key);
+			
+			// if there was no valid key to be found
+			if (it == std::end(board))
 			{
-
+				continue_search = false;
+			}
+			// if key was found
+			else
+			{
+				// if checked value is false
+				if (checked[i])
 			}
 		}
 	}
