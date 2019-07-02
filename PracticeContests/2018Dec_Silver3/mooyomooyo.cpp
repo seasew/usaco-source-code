@@ -14,6 +14,10 @@ PROB: mooyomooyo
 #include <queue>
 #include <utility>
 #include <iterator>
+#include <set>
+
+int deltai[] = {0, 1, 0, -1};
+int deltaj[] = {1, 0, -1, 0};
 
 // number of rows, <= 100
 int n;
@@ -21,6 +25,37 @@ int n;
 int k;
 // contains numbers 0-9 representing the board
 int board[10][101];
+
+// array containing the positions of the current blob
+std::set<std::pair<int, int>> curblob;
+
+// recursive method to record the current blob (curblob should be empty when this method is called)
+bool hasMore(int key, int i, int j)
+{
+	// label i and j position
+	curblob.insert(std::make_pair(i, j));
+
+	bool hasmore = false;
+
+	// check for values with key color in all four directions
+	for (int a = 0; a < 4; a++)
+	{
+		int newi = i + deltai[a];
+		int newj = j + deltaj[a];
+
+		// if the color matches and newi,newj doesn't already exist in curblob
+		if (board[newi][newj] == key && (curblob.find(std::make_pair(newi, newj)) == curblob.end()))
+		{
+			bool b = hasMore(key, newi, newj);
+			if (b)
+			{
+				hasmore = true;
+			}
+		}
+	}
+
+	return hasmore;
+}
 
 // turn blobs with color key and size at least k into zeros, return true if blobs found
 bool labelBlobs(int key)
