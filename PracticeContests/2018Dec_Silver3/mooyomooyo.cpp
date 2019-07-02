@@ -72,6 +72,7 @@ int main()
 	}
 
 	// write to file
+	for (int i = 0; i < 1)
 
 	// Close Streams
 	fin.close();
