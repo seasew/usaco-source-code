@@ -13,6 +13,7 @@ PROB: mooyomooyo
 #include <functional>
 #include <queue>
 #include <utility>
+#include <iterator>
 
 // number of rows, <= 100
 int n;
@@ -68,8 +69,21 @@ int main()
 		if (hasBlobs)
 		{
 			// gravity
-			// for each of the 10 col, start at index 0
-			// find 
+			// for each of the 10 col, start at index [n-1]
+			// find haybales until the previous one is 0 but the current one is not
+			for (int i = 0; i < 10; i++)
+			{
+				int lasti = n - 1;
+				while (board[i][lasti] == 0)
+				{
+					lasti--;
+				}
+
+				// lasti is the last index of a colored hay bale
+				// remove all zeros in range 0 to lasti + 1
+				std::remove(std::begin(board), std::begin(board) + lasti + 1, 0);
+			}
+
 		}
 	}
 
