@@ -25,7 +25,7 @@ int n;
 int k;
 // contains numbers 0-9 representing the board
 int board[10][101];
-bool checked[10][101];
+bool checked[10][101] = { false };
 
 // array containing the positions of the current blob
 std::set<std::pair<int, int>> curblob;
@@ -49,6 +49,8 @@ void floodfill(int target, int i, int j)
 
 	// add i,j to curblob
 	curblob.insert(std::make_pair(i, j));
+	// set its checked value to true
+	checked[i][j] = true;
 
 	// call floodfill for all four directions
 	for (int a = 0; a < 4; a++)
@@ -61,6 +63,7 @@ void floodfill(int target, int i, int j)
 bool labelBlobs(int key)
 {         
 	curblob.clear();
+	checked[10][101] = { false };
 
 	// keep track of the last
 
@@ -69,7 +72,6 @@ bool labelBlobs(int key)
 	{
 		// floodfill the first key color found in board
 		int i;
-		std::iterator<int> it_j;
 		for (i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < n; j++)
