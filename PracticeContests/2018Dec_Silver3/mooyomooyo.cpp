@@ -30,31 +30,26 @@ int board[10][101];
 std::set<std::pair<int, int>> curblob;
 
 // recursive method to record the current blob (curblob should be empty when this method is called)
-bool hasMore(int key, int i, int j)
+void floodfill(int target, int i, int j)
 {
-	// label i and j position
-	curblob.insert(std::make_pair(i, j));
-
-	bool hasmore = false;
-
-	// check for values with key color in all four directions
-	for (int a = 0; a < 4; a++)
+	// check 1: i and j are in bounds
+	if (!(i >= 0 && i < n && j >= 0 && j < n))
 	{
-		int newi = i + deltai[a];
-		int newj = j + deltaj[a];
-
-		// if the color matches and newi,newj doesn't already exist in curblob
-		if (board[newi][newj] == key && (curblob.find(std::make_pair(newi, newj)) == curblob.end()))
-		{
-			bool b = hasMore(key, newi, newj);
-			if (b)
-			{
-				hasmore = true;
-			}
-		}
+		return;
 	}
 
-	return hasmore;
+	// check 2: board[i][j] has color target
+	if (!(board[i][j] == target))
+	{
+		return;
+	}
+
+	// otherwise, continue
+	// call floodfill for all four directions
+	for (int a = 0; a < 4; a++)
+	{
+		floodfill(target, i + deltai[a], j + deltaj[a]);
+	}
 }
 
 // turn blobs with color key and size at least k into zeros, return true if blobs found
