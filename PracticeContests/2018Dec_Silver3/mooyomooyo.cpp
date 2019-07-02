@@ -19,9 +19,9 @@ int n;
 // minimum number of haybales in a blob
 int k;
 // contains numbers 0-9 representing the board
-int board[10][150];
+int board[10][101];
 
-// turn blobs with color key and size at least k into zeros, return true if there were valid blobs
+// turn blobs with color key and size at least k into zeros, return true if blobs found
 bool labelBlobs(int key)
 {
 	
@@ -49,7 +49,8 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			fin >> board[i][j];
+			// read board "backwards", so that the first row read is the last row in the array
+			fin >> board[i][n - j];
 		}
 	}
 
@@ -67,6 +68,8 @@ int main()
 		if (hasBlobs)
 		{
 			// gravity
+			// for each of the 10 col, start at index 0
+			// find 
 		}
 	}
 
@@ -75,7 +78,8 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			fout << board[i][j];
+			// print out board "backwards"
+			fout << board[i][n - j];
 		}
 	}
 
