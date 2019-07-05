@@ -62,6 +62,14 @@ void floodfill(int target, int i, int j)
 // turn blobs with color key and size at least k into zeros, return true if blobs found
 bool labelBlobs(int key)
 {         
+
+	// test
+	for (int i = 0; i < 10; i++)
+	{
+		auto it = std::find(std::begin(board[i]), std::end(board[i]), key);
+	}
+	// test
+
 	curblob.clear();
 	checked[10][101] = { false };
 
@@ -72,14 +80,20 @@ bool labelBlobs(int key)
 	{
 		// floodfill the first key color found in board
 		
-		bool continue_search = true;
-		// find the first occurence of key color with the checked value false
-		while (continue_search)
+		auto it = std::find(std::begin(board[0]), std::end(board[0]), key);
+
+		int nexti, nextj;
+
+		// for each column
+		for (int i = 0; i < 10; i++)
 		{
-			auto it = std::find(std::begin(board), std::end(board), key);
-			
-			// if there was no valid key to be found
-			if (it == std::end(board))
+			// find the first occurence of key color with the checked value false
+			while (continue_search)
+			{
+			it = std::find(std::begin(board[i]), std::end(board[i]), key);
+
+			// if there was no valid key to be found in this column
+			if (it == std::end(board[i]))
 			{
 				continue_search = false;
 			}
@@ -88,6 +102,15 @@ bool labelBlobs(int key)
 			{
 				// if checked value is false
 				if (checked[i])
+			}
+
+			
+			// if a key was found in this column, set it to nexti & next j and exit
+			if (it != std::end(board[i]))
+			{
+				nexti = i;
+				nextj = std::distance(std::begin(board[i]), it);
+				break;
 			}
 		}
 	}
