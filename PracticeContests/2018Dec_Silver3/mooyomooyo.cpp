@@ -82,26 +82,30 @@ bool labelBlobs(int key)
 		
 		auto it = std::find(std::begin(board[0]), std::end(board[0]), key);
 
-		int nexti, nextj;
+		int nexti, nextj = -1;
 
 		// for each column
 		for (int i = 0; i < 10; i++)
 		{
 			// find the first occurence of key color with the checked value false
+			bool continue_search = true;
 			while (continue_search)
 			{
-			it = std::find(std::begin(board[i]), std::end(board[i]), key);
+				it = std::find(std::begin(board[i]), std::end(board[i]), key);
+				int j = std::distance(std::begin(board[0]), it);
 
-			// if there was no valid key to be found in this column
-			if (it == std::end(board[i]))
-			{
-				continue_search = false;
-			}
-			// if key was found
-			else
-			{
-				// if checked value is false
-				if (checked[i])
+				// stop the search when no more keys can be found
+				if (it == std::end(board[i]))
+				{
+					continue_search = false;
+				}
+				// stop the search when a key is found and unchecked
+				else if (it != std::end(board[i]) && !checked[i][j])
+				{
+					continue_search = false;
+					nexti = i;
+					nextj = j;
+				}
 			}
 
 			
