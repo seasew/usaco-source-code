@@ -79,8 +79,6 @@ bool labelBlobs(int key)
 	while (curblob.size() > 0)
 	{
 		// floodfill the first key color found in board
-		
-		auto it = std::find(std::begin(board[0]), std::end(board[0]), key);
 
 		int nexti, nextj = -1;
 
@@ -91,7 +89,7 @@ bool labelBlobs(int key)
 			bool continue_search = true;
 			while (continue_search)
 			{
-				it = std::find(std::begin(board[i]), std::end(board[i]), key);
+				auto it = std::find(std::begin(board[i]), std::end(board[i]), key);
 				int j = std::distance(std::begin(board[0]), it);
 
 				// stop the search when no more keys can be found
@@ -108,14 +106,7 @@ bool labelBlobs(int key)
 				}
 			}
 
-			
-			// if a key was found in this column, set it to nexti & next j and exit
-			if (it != std::end(board[i]))
-			{
-				nexti = i;
-				nextj = std::distance(std::begin(board[i]), it);
-				break;
-			}
+
 		}
 	}
 }
