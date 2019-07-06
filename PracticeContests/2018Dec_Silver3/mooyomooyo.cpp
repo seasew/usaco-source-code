@@ -67,7 +67,11 @@ bool labelBlobs(int key)
 
 	bool firstcheck = true;
 	curblob.clear();
-	checked[10][101] = { false };
+
+	for (int i = 0; i < 10; i++)
+	{
+		std::fill(checked[i], checked[i] + n, false);
+	}
 
 	// while there are still curblobs
 	while (curblob.size() > 0 || firstcheck)
