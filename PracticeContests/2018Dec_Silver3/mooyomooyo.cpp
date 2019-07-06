@@ -61,24 +61,20 @@ void floodfill(int target, int i, int j)
 
 // turn blobs with color key and size at least k into zeros, return true if blobs found
 bool labelBlobs(int key)
-{         
+{      
+	// bool to return
+	bool hasblobs = false;
 
-	// test
-	for (int i = 0; i < 10; i++)
-	{
-		auto it = std::find(std::begin(board[i]), std::end(board[i]), key);
-	}
-	// test
-
+	bool firstcheck = true;
 	curblob.clear();
 	checked[10][101] = { false };
 
-	// keep track of the last
-
 	// while there are still curblobs
-	while (curblob.size() > 0)
+	while (curblob.size() > 0 || firstcheck)
 	{
+		firstcheck = false;
 		// floodfill the first key color found in board
+		// if key color not found, exit
 
 		int nexti, nextj = -1;
 
@@ -106,9 +102,46 @@ bool labelBlobs(int key)
 				}
 			}
 
+			// if continue_search is false
+			if (!continue_search)
+			{
+				// exit the for loop
+				break;
+			}
+		}
 
+		// FLOODFILL if the curblob meets size requirements, starting with pos (nexti, nextj)
+		if (nexti >= 0 && nextj >= 0)
+		{
+			floodfill(key, nexti, nextj);
+
+			// if the curblob is large enough, color with 0s
+			if (curblob.size() >= k)
+			{
+				// color in the positions in curblob
+				auto setit = curblob.begin();
+				for (int a = 0; a < curblob.size(); a++)
+				{
+					std::pair<int, int> pos = *setit;
+
+					board[pos.first][pos.second] = 0;
+
+					// update iterator
+					setit++;
+				}
+
+				// set hasblobs to true
+				hasblobs = true;
+			}
+		}
+		// no nexti & nextj was found, exit immediately
+		else
+		{
+			break;
 		}
 	}
+
+	return hasblobs;
 }
 
 int main()
