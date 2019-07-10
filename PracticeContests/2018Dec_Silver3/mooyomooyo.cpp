@@ -25,6 +25,8 @@ int n;
 int k;
 // contains numbers 0-9 representing the board
 int board[10][101];
+// bool array to keep track of checked positions (default is false)
+bool checked[10][101];
 
 // recursive method to record the current blob (curblob should be empty when this method is called)
 void floodfill(int target, int i, int j)
@@ -60,7 +62,30 @@ int main()
 		}
 	}
 
-	
+
+	bool hasmore = true;
+	while (hasmore)
+	{
+		// continue floodfilling when value is found
+		bool foundval = true;
+		while (foundval)
+		{
+			// find a nonzero value and unchecked
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < n; j++)
+				{
+					// valid value check
+					if (board[i][j] != 0 && !checked[i][j])
+					{
+						
+					}
+				}
+			}
+		}
+
+		// gravity
+	}
 
 	// write to file
 	for (int i = 0; i < 10; i++)
