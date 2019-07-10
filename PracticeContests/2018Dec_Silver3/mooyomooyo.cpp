@@ -73,6 +73,8 @@ int main()
 		bool foundval = true;
 		while (foundval)
 		{
+			foundval = false;
+
 			// find a nonzero value and unchecked
 			for (int i = 0; i < 10; i++)
 			{
@@ -81,7 +83,9 @@ int main()
 					// valid value check
 					if (board[i][j] != 0 && !checked[i][j])
 					{
-						
+						foundval = true;
+						// floodfill!
+						floodfill(board[i][j], i, j);
 					}
 				}
 			}
