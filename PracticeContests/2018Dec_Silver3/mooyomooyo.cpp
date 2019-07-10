@@ -26,7 +26,7 @@ int k;
 // contains numbers 0-9 representing the board
 int board[10][101];
 // bool array to keep track of checked positions (default is false)
-bool checked[10][101];
+bool checked[10][101] = {false};
 
 // recursive method to record the current blob (curblob should be empty when this method is called)
 void floodfill(int target, int i, int j)
@@ -66,6 +66,9 @@ int main()
 	bool hasmore = true;
 	while (hasmore)
 	{
+		// reset checked array values to false
+		std::fill(&checked[0][0], &checked[0][0] + sizeof(checked), false);
+
 		// continue floodfilling when value is found
 		bool foundval = true;
 		while (foundval)
