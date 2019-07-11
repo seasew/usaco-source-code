@@ -29,7 +29,7 @@ int board[10][101];
 bool checked[10][101] = {false};
 
 // recursive method to record the current blob (curblob should be empty when this method is called)
-void floodfill(int target, int i, int j)
+bool floodfill(int target, int i, int j)
 {
 	
 
@@ -70,10 +70,11 @@ int main()
 		std::fill(&checked[0][0], &checked[0][0] + sizeof(checked), false);
 
 		// continue floodfilling when value is found
-		bool foundval = true;
-		while (foundval)
+		bool foundvalue = true;
+		int count = 0;
+		while (foundvalue)
 		{
-			foundval = false;
+			foundvalue = false;
 
 			// find a nonzero value and unchecked
 			for (int i = 0; i < 10; i++)
@@ -83,15 +84,31 @@ int main()
 					// valid value check
 					if (board[i][j] != 0 && !checked[i][j])
 					{
-						foundval = true;
-						// floodfill!
-						floodfill(board[i][j], i, j);
+						// since a value was found, set true
+						foundvalue = true;
+
+
+						// floodfill! found a blob with size at least k?
+						bool foundvalid = floodfill(board[i][j], i, j);
+
+						if (foundvalid)
+						{
+							count++;
+						}
 					}
 				}
 			}
 		}
 
+		// if no valid blob was found, the game ends
+		if (count == 0)
+		{
+			hasmore = false;
+			break;
+		}
+
 		// gravity
+		// TODO
 	}
 
 	// write to file
