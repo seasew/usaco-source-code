@@ -108,19 +108,10 @@ int main()
 		}
 
 		// now that all the valid blobs have been turned to 0s, use gravity
-		// look for the last nonzero value in column (that is the ending place)
 		// for each column
 		for (int i = 0; i < 10; i++)
 		{
-			int j = n - 1;
-			while (j >= 0 && board[i][j] == 0)
-			{
-				j--;
-			}
-			j++;
-			// now j equals the first of the last 0s
-
-			// now overwrite all zero elements before j with nonzero elements
+			
 			
 		}
 	}
