@@ -111,8 +111,26 @@ int main()
 		// for each column
 		for (int i = 0; i < 10; i++)
 		{
-			
-			
+			// keeps track of the current j to begin overwriting
+			int bottom = 0;
+			// keeps track of the next nonzero to move down
+			int top = 0;
+
+			while (top < n && bottom < n)
+			{
+				// find the next nonzero
+				while (top < n && bottom < n && board[i][top] != 0)
+				{
+					top++;
+				}
+
+				// move down
+				board[i][bottom] = board[i][top];
+				board[i][top] = 0;
+
+				bottom++;
+				top++;
+			}
 		}
 	}
 
