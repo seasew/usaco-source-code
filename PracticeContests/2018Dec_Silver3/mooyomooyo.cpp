@@ -74,14 +74,14 @@ int main()
 
 	// read file
 	fin >> n >> k;
-	for (int i = 0; i < 10; i++)
+	for (int j = n - 1; j >= 0; j--)
 	{
-		for (int j = 0; j < n; j++)
+		for (int i = 0; i < 10; i++)
 		{
 			// read board "backwards", so that the first row read is the last row in the array
 			char c;
 			fin >> c;
-			board[i][n - j - 1] = c - '0';
+			board[i][j] = c - '0';
 		}
 	}
 
