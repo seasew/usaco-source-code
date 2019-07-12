@@ -176,9 +176,13 @@ int main()
 					break;
 				}
 
-				// move down
-				board[i][bottom] = board[i][top];
-				board[i][top] = 0;
+				// only move down if bottom < top
+				if (bottom < top)
+				{
+					// move down
+					board[i][bottom] = board[i][top];
+					board[i][top] = 0;
+				}
 
 				bottom++;
 				top++;
