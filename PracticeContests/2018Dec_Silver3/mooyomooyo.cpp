@@ -158,9 +158,22 @@ int main()
 			while (top < n && bottom < n)
 			{
 				// find the next nonzero
-				while (top < n && bottom < n && board[i][top] == 0)
+				while (top < n && board[i][top] == 0)
 				{
 					top++;
+				}
+
+				// find the next zero
+				while (bottom < n && board[i][bottom] != 0)
+				{
+					bottom++;
+				}
+
+				// if indexes out of bounds
+				if (top >= n || bottom >= n)
+				{
+					// exit
+					break;
 				}
 
 				// move down
@@ -175,7 +188,7 @@ int main()
 
 	// write to file
 	// for each row (starting with the highest one)
-	for (int j = n - 1; j >= 0; j--)
+	for (int j = 0; j < n; j++)
 	{
 		// for each column
 		for (int i = 0; i < 10; i++)
