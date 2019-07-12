@@ -112,7 +112,7 @@ int main()
 						floodfill(board[i][j], i, j);
 
 						// if it is a valid blob
-						if (curblob.size >= k)
+						if (curblob.size() >= k)
 						{
 							// update count
 							count++;
