@@ -183,6 +183,13 @@ int main()
 					board[i][bottom] = board[i][top];
 					board[i][top] = 0;
 				}
+				// if no values were moved down
+				else
+				{
+					// find another value
+					// increment top
+					top++;
+				}
 			}
 		}
 	}
