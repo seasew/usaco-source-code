@@ -35,11 +35,11 @@ std::list<std::pair<int, int>> curblob;
 void floodfill(int target, int i, int j)
 {
 	// basic checks
-	if (board[i][j] != target)
+	if (i < 0 || i >= n || j < 0 || j >= n)
 	{
 		return;
 	}
-	if (i < 0 || i >= n || j < 0 || j >= n)
+	if (board[i][j] != target)
 	{
 		return;
 	}
@@ -49,7 +49,11 @@ void floodfill(int target, int i, int j)
 	// update curblob
 	curblob.insert(curblob.end(), std::make_pair(i, j));
 
-
+	// check all four directions 
+	for (int a = 0; a < 4; a++)
+	{
+		floodfill(target, )
+	}
 }
 
 int main()
