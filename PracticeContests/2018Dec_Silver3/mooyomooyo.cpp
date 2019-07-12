@@ -25,9 +25,9 @@ int n;
 // minimum number of haybales in a blob
 int k;
 // contains numbers 0-9 representing the board
-int board[10][101];
+int board[20][200];
 // bool array to keep track of checked positions (default is false)
-bool checked[10][101] = {false};
+bool checked[20][200] = {false};
 // current blob
 std::list<std::pair<int, int>> curblob;
 
@@ -192,7 +192,7 @@ int main()
 
 	// write to file
 	// for each row (starting with the highest one)
-	for (int j = 0; j < n; j++)
+	for (int j = n - 1; j >= 0; j--)
 	{
 		// for each column
 		for (int i = 0; i < 10; i++)
