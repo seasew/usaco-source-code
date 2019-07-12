@@ -79,7 +79,9 @@ int main()
 		for (int j = 0; j < n; j++)
 		{
 			// read board "backwards", so that the first row read is the last row in the array
-			fin >> board[i][n - j - 1];
+			char c;
+			fin >> c;
+			board[i][n - j - 1] = c - '0';
 		}
 	}
 
