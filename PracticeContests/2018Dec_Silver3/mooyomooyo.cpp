@@ -52,7 +52,7 @@ void floodfill(int target, int i, int j)
 	// check all four directions 
 	for (int a = 0; a < 4; a++)
 	{
-		floodfill(target, )
+		floodfill(target, i + deltai[a], j + deltaj[a]);
 	}
 }
 
