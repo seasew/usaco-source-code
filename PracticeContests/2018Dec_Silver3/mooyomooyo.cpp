@@ -15,6 +15,7 @@ PROB: mooyomooyo
 #include <utility>
 #include <iterator>
 #include <set>
+#include <list>
 
 int deltai[] = {0, 1, 0, -1};
 int deltaj[] = {1, 0, -1, 0};
@@ -27,9 +28,11 @@ int k;
 int board[10][101];
 // bool array to keep track of checked positions (default is false)
 bool checked[10][101] = {false};
+// current blob
+std::list<std::pair<int, int>> curblob;
 
 // recursive method to record the current blob (curblob should be empty when this method is called)
-bool floodfill(int target, int i, int j)
+void floodfill(int target, int i, int j)
 {
 	
 
@@ -81,20 +84,30 @@ int main()
 			{
 				for (int j = 0; j < n; j++)
 				{
-					// valid value check
+					// value has to be nonzero and unchecked
 					if (board[i][j] != 0 && !checked[i][j])
 					{
 						// since a value was found, set true
 						foundvalue = true;
 
-
 						// floodfill! found a blob with size at least k?
-						bool foundvalid = floodfill(board[i][j], i, j);
+						floodfill(board[i][j], i, j);
 
-						if (foundvalid)
+						// if it is a valid blob
+						if (curblob.size >= k)
 						{
+							// update count
 							count++;
+
+							// turn to 0s
+							for (std::pair<int, int> pos : curblob)
+							{
+								board[pos.first][pos.second] = 0;
+							}
 						}
+
+						// clear curblob
+						curblob.clear();
 					}
 				}
 			}
