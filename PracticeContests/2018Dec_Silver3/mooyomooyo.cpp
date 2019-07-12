@@ -35,7 +35,7 @@ std::list<std::pair<int, int>> curblob;
 void floodfill(int target, int i, int j)
 {
 	// basic checks
-	if (i < 0 || i >= n || j < 0 || j >= n)
+	if (i < 0 || i >= 10 || j < 0 || j >= n)
 	{
 		return;
 	}
