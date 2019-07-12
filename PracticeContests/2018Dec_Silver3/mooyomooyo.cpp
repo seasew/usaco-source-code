@@ -44,6 +44,12 @@ void floodfill(int target, int i, int j)
 		return;
 	}
 
+	// if already been checked
+	if (checked[i][j])
+	{
+		return;
+	}
+
 	// update checked array
 	checked[i][j] = true;
 	// update curblob
