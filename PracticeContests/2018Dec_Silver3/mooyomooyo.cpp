@@ -183,9 +183,6 @@ int main()
 					board[i][bottom] = board[i][top];
 					board[i][top] = 0;
 				}
-
-				bottom++;
-				top++;
 			}
 		}
 	}
