@@ -34,7 +34,21 @@ std::list<std::pair<int, int>> curblob;
 // recursive method to record the current blob (curblob should be empty when this method is called)
 void floodfill(int target, int i, int j)
 {
-	
+	// basic checks
+	if (board[i][j] != target)
+	{
+		return;
+	}
+	if (i < 0 || i >= n || j < 0 || j >= n)
+	{
+		return;
+	}
+
+	// update checked array
+	checked[i][j] = true;
+	// update curblob
+	curblob.insert(curblob.end(), std::make_pair(i, j));
+
 
 }
 
