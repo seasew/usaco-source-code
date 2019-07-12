@@ -166,13 +166,16 @@ int main()
 	}
 
 	// write to file
-	for (int i = 0; i < 10; i++)
+	// for each row (starting with the highest one)
+	for (int j = n - 1; j >= 0; j--)
 	{
-		for (int j = 0; j < n; j++)
+		// for each column
+		for (int i = 0; i < 10; i++)
 		{
 			// print out board "backwards"
-			fout << board[i][n - j];
+			fout << board[i][j];
 		}
+		fout << "\n";
 	}
 
 	// Close Streams
