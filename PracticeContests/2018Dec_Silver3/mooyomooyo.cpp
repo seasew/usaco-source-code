@@ -158,7 +158,7 @@ int main()
 			while (top < n && bottom < n)
 			{
 				// find the next nonzero
-				while (top < n && bottom < n && board[i][top] != 0)
+				while (top < n && bottom < n && board[i][top] == 0)
 				{
 					top++;
 				}
