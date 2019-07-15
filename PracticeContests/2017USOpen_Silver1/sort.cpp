@@ -66,6 +66,12 @@ int main()
 		int indexinsorted = std::distance(sorted.begin(), it);
 		int diff = std::abs(indexinsorted - count);
 		maxdist = std::max(maxdist, diff);
+
+		// remove value at index count in list arr
+		arr.erase(arr.begin() + count);
+		// remove value at iterator it in list sorted
+		sorted.erase(it);
+
 		count++;
 	}
 
