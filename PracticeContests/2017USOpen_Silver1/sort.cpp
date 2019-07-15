@@ -51,26 +51,29 @@ int main()
 	// for each value in the original array
 	int maxdist = 0;
 	int count = 0;
-	for (int val : arr)
+	for (int i = 0; i < n; i++)
 	{
+		// set the wanted value
+		int arrval = arr.front();
+
 		// find val in the sorted arr
-		auto it = std::find(sorted.begin(), sorted.end(), val);
+		auto sortedit = std::find(sorted.begin(), sorted.end(), arrval);
 
 		// if value was not found
-		if (it == sorted.end())
+		if (sortedit == sorted.end())
 		{
 			break;
 		}
 
 		// find the difference 
-		int indexinsorted = std::distance(sorted.begin(), it);
+		int indexinsorted = std::distance(sorted.begin(), sortedit);
 		int diff = std::abs(indexinsorted - count);
 		maxdist = std::max(maxdist, diff);
 
-		// remove value at index count in list arr
-		arr.erase(arr.begin() + count);
+		// remove first value in list arr
+		arr.pop_front();
 		// remove value at iterator it in list sorted
-		sorted.erase(it);
+		sorted.erase(sortedit);
 
 		count++;
 	}
