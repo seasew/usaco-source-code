@@ -42,10 +42,10 @@ int main()
 		int val;
 		fin >> val;
 		arr.push_back(val);
+		sorted.push_back(val);
 	}
 
 	// sort
-	std::copy(arr.begin(), arr.end(), sorted.begin());
 	sorted.sort();
 
 	// for each value in the original array
@@ -55,6 +55,12 @@ int main()
 	{
 		// find val in the sorted arr
 		auto it = std::find(sorted.begin(), sorted.end(), val);
+
+		// if value was not found
+		if (it == sorted.end())
+		{
+			break;
+		}
 
 		// find the difference 
 		int indexinsorted = std::distance(sorted.begin(), it);
