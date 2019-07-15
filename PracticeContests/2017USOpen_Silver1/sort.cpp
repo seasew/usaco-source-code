@@ -50,9 +50,17 @@ int main()
 
 	// for each value in the original array
 	int maxdist = 0;
+	int count = 0;
 	for (int val : arr)
 	{
 		// find val in the sorted arr
+		auto it = std::find(sorted.begin(), sorted.end(), val);
+
+		// find the difference 
+		int indexinsorted = std::distance(sorted.begin(), it);
+		int diff = std::abs(indexinsorted - count);
+		maxdist = std::max(maxdist, diff);
+		count++;
 	}
 
 	// write to file
