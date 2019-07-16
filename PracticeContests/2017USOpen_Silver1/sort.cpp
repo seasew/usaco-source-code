@@ -62,10 +62,10 @@ int main()
 	fout << maxdist << "\n";
 
 	// TEST
-	bool sorted = false;
-	while (!sorted)
+	bool sortedc = false;
+	while (!sortedc)
 	{
-		sorted = true;
+		sortedc = true;
 		fout << "moo" << "\n";
 		for (int i = 0; i < n - 1; i++)
 		{
@@ -74,7 +74,7 @@ int main()
 				std::pair<int, int> temp = arr[i + 1];
 				arr[i + 1] = arr[i];
 				arr[i] = temp;
-				sorted = false;
+				sortedc = false;
 			}
 		}
 	}
