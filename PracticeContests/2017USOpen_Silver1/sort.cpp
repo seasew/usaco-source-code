@@ -59,7 +59,7 @@ int main()
 	}
 
 	// write to file
-	fout << maxdist << "\n";
+	fout << maxdist + 1 << "\n";
 
 	// TEST
 	bool sortedc = false;
