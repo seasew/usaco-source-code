@@ -16,8 +16,7 @@ PROB: starter_code
 #include <list>
 
 int n;
-int arr[1000000];
-int indexes[1000000];
+std::pair<int, int> arr[1000000];
 
 int main()
 {
@@ -41,12 +40,12 @@ int main()
 	{
 		int val;
 		fin >> val;
-		arr[i] = val;
-		indexes[i] = i;
+		// (value, orig index)
+		arr[i] = std::make_pair(val, i);
 	}
 
-	// sort
-	sorted.sort();
+	// sort the indexes
+	std::sort(std::begin(arr), std::end(arr));
 
 	// for each value in the original array
 	int maxdist = 0;
