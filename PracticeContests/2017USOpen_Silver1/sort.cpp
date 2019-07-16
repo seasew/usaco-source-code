@@ -17,6 +17,7 @@ PROB: starter_code
 
 int n;
 std::pair<int, int> arr[1000000];
+std::pair<int, int> sorted[1000000];
 
 int main()
 {
@@ -42,39 +43,19 @@ int main()
 		fin >> val;
 		// (value, orig index)
 		arr[i] = std::make_pair(val, i);
+		sorted[i] = std::make_pair(val, i);
 	}
 
 	// sort the indexes
-	std::sort(std::begin(arr), std::end(arr));
+	std::sort(std::begin(sorted), std::end(sorted));
 
-	// for each value in the original array
+	// for each value in the sorted array
 	int maxdist = 0;
-	int count = 0;
 	for (int i = 0; i < n; i++)
 	{
-		// set the wanted value
-		int arrval = arr.front();
+		// abs(i - sorted[i].second)
 
-		// find val in the sorted arr
-		auto sortedit = std::find(sorted.begin(), sorted.end(), arrval);
-
-		// if value was not found
-		if (sortedit == sorted.end())
-		{
-			break;
-		}
-
-		// find the difference 
-		int indexinsorted = std::distance(sorted.begin(), sortedit);
-		int diff = std::abs(indexinsorted - count);
-		maxdist = std::max(maxdist, diff);
-
-		// remove first value in list arr
-		arr.pop_front();
-		// remove value at iterator it in list sorted
-		sorted.erase(sortedit);
-
-		count++;
+		maxdist = std::max(maxdist, std::abs(i - sorted[i].second));
 	}
 
 	// write to file
