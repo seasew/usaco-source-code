@@ -54,8 +54,13 @@ int main()
 	for (int i = 0; i < n; i++)
 	{
 		// abs(i - sorted[i].second)
-
-		maxdist = std::max(maxdist, std::abs(i - sorted[i].second));
+		// i is the new index
+		// sorted[i].second is the orig index
+		// bubbling to the left only: orig index > new index
+		if (sorted[i].second > i)
+		{
+			maxdist = std::max(maxdist, std::abs(i - sorted[i].second));
+		}
 	}
 
 	// write to file
