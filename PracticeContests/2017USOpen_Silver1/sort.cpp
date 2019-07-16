@@ -16,8 +16,8 @@ PROB: starter_code
 #include <list>
 
 int n;
-std::pair<int, int> arr[1000000];
-std::pair<int, int> sorted[1000000];
+std::pair<int, int> arr[1000100];
+std::pair<int, int> sorted[1000100];
 
 int main()
 {
@@ -47,7 +47,7 @@ int main()
 	}
 
 	// sort the indexes
-	std::sort(std::begin(sorted), std::end(sorted));
+	std::sort(std::begin(sorted), std::begin(sorted) + n);
 
 	// for each value in the sorted array
 	int maxdist = 0;
@@ -60,6 +60,25 @@ int main()
 
 	// write to file
 	fout << maxdist << "\n";
+
+	// TEST
+	bool sorted = false;
+	while (!sorted)
+	{
+		sorted = true;
+		fout << "moo" << "\n";
+		for (int i = 0; i < n - 1; i++)
+		{
+			if (arr[i + 1].first < arr[i].first)
+			{
+				std::pair<int, int> temp = arr[i + 1];
+				arr[i + 1] = arr[i];
+				arr[i] = temp;
+				sorted = false;
+			}
+		}
+	}
+	// TEST
 
 	// Close Streams
 	fin.close();
