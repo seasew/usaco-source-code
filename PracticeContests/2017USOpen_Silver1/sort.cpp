@@ -16,8 +16,8 @@ PROB: starter_code
 #include <list>
 
 int n;
-std::list<int> arr;
-std::list<int> sorted;
+int arr[1000000];
+int indexes[1000000];
 
 int main()
 {
@@ -41,8 +41,8 @@ int main()
 	{
 		int val;
 		fin >> val;
-		arr.push_back(val);
-		sorted.push_back(val);
+		arr[i] = val;
+		indexes[i] = i;
 	}
 
 	// sort
