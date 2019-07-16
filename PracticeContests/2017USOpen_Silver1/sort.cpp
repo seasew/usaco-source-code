@@ -61,25 +61,6 @@ int main()
 	// write to file
 	fout << maxdist + 1 << "\n";
 
-	// TEST
-	bool sortedc = false;
-	while (!sortedc)
-	{
-		sortedc = true;
-		fout << "moo" << "\n";
-		for (int i = 0; i < n - 1; i++)
-		{
-			if (arr[i + 1].first < arr[i].first)
-			{
-				std::pair<int, int> temp = arr[i + 1];
-				arr[i + 1] = arr[i];
-				arr[i] = temp;
-				sortedc = false;
-			}
-		}
-	}
-	// TEST
-
 	// Close Streams
 	fin.close();
 	fout.close();
