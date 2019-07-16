@@ -59,7 +59,7 @@ int main()
 	}
 
 	// write to file
-	fout << maxdist;
+	fout << maxdist << "\n";
 
 	// Close Streams
 	fin.close();
