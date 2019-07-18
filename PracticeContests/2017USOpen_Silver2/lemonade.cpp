@@ -14,8 +14,8 @@ PROB: starter_code
 #include <queue>
 #include <utility>
 
+typedef long long int wll;
 int n;
-int arr[1000000000];
 
 int main()
 {
@@ -33,6 +33,8 @@ int main()
 		return 1;
 	}
 
+	wll* arr = new wll[1000000000];
+
 	int count = 0;
 	int curi = 0;
 
@@ -44,7 +46,7 @@ int main()
 	}
 
 	// sort the array in descending order
-	std::sort(std::begin(arr), std::begin(arr) + n, std::greater<int>());
+	std::sort(std::begin(arr), std::begin(arr) + n, std::greater<wll>());
 
 	// for each value
 	while (curi < n)
