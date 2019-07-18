@@ -16,6 +16,7 @@ PROB: starter_code
 
 typedef long long int wll;
 int n;
+wll arr[100000];
 
 int main()
 {
@@ -32,8 +33,6 @@ int main()
 		fout.close();
 		return 1;
 	}
-
-	wll* arr = new wll[1000000000];
 
 	int count = 0;
 	int curi = 0;
