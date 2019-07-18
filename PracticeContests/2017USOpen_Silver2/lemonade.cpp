@@ -44,7 +44,24 @@ int main()
 	}
 
 	// sort the array in descending order
+	std::sort(std::begin(arr), std::begin(arr) + n, std::greater<int>());
 
+	// for each value
+	while (curi < n)
+	{
+		// if count is at most the max num of cows for i
+		if (arr[curi] >= count)
+		{
+			count++;
+			curi++;
+		}
+		else
+		{
+			// done
+			fout << count << "\n";
+			break;
+		}
+	}
 
 	// Close Streams
 	fin.close();
