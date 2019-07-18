@@ -16,7 +16,7 @@ PROB: starter_code
 
 typedef long long int wll;
 int n;
-wll arr[100000];
+wll arr[100500];
 
 int main()
 {
@@ -29,6 +29,9 @@ int main()
 	if (!fin.is_open() || !fout.is_open())
 	{
 		std::cout << "File could not be opened.";
+
+		fout << "hello this is a test";
+
 		fin.close();
 		fout.close();
 		return 1;
@@ -58,11 +61,13 @@ int main()
 		}
 		else
 		{
-			// done
-			fout << count << "\n";
+			
 			break;
 		}
 	}
+
+	// done
+	fout << count << "\n";
 
 	// Close Streams
 	fin.close();
