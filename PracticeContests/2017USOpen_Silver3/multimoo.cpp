@@ -118,23 +118,32 @@ int main()
 		}
 	}
 
+
+	// clear the bool array
+	std::fill(std::begin(visited), std::end(visited), false);
+
 	// 2-team code
 	// iterate through grid 
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			// clear the bool array
-			std::fill(std::begin(visited), std::end(visited), false);
 
 			// for each position, call dfs2 for (i,j) and each of the other 4 positions
 			for (int a = 0; a < 4; a++)
 			{
 				// (i, j) is current position
 				// grid[newi][newj] is target2
-				int t1 = grid[i][j];
-				int t2 = grid[i + deltai[a]][j + deltaj[a]];
+				int newi = i + deltai[a];
+				int newj = j + deltaj[a];
 				
+				// basic checks
+				// all indexes must be in bounds
+				if (newi >= 0 && newi < n && newj >= 0 && newj < n)
+				{
+					// 
+					if ()
+				}
 			}
 		}
 	}
