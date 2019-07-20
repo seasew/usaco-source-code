@@ -14,6 +14,9 @@ PROB: starter_code
 #include <queue>
 #include <utility>
 
+int deltai[] = {1, 0, -1, 0};
+int deltaj[] = {0, 1, 0, -1};
+
 int n;
 
 // N by N grid (max value is 250)
@@ -21,6 +24,38 @@ int grid[250][250];
 
 // true if already visited by search
 bool visited[250][250];
+
+int max1;
+int max2;
+
+int cursize;
+
+// depth-first-search
+void dfs(int i, int j, int target)
+{
+	// basic checks
+	// i and j in bounds?
+	if (!(i >= 0 && i < n) || !(j >= 0 && j < n))
+	{
+		return;
+	}
+	// i and j match target value?
+	if (grid[i][j] != target)
+	{
+		return;
+	}
+	// i and j already visited?
+	if (visited[i][j])
+	{
+		return;
+	}
+
+	// update visited value
+	visited[i][j] = true;
+	// update cursize
+	cursize++;
+
+}
 
 int main()
 {
@@ -47,6 +82,8 @@ int main()
 			fin >> grid[i][j];
 		}
 	}
+
+	
 
 	// Close Streams
 	fin.close();
