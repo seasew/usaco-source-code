@@ -90,7 +90,28 @@ int main()
 		}
 	}
 
-	
+	// 1-team code
+	// iterate through grid
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			// if (i, j) has not been visited yet
+			if (!visited[i][j])
+			{
+				// call dfs
+				dfs(i, j, grid[i][j]);
+
+				// cmp cursize to max1
+				max1 = std::max(max1, cursize);
+				// reset cursize
+				cursize = 0;
+			}
+		}
+	}
+
+	// write to file
+	fin << max1 << "\n";
 
 	// Close Streams
 	fin.close();
