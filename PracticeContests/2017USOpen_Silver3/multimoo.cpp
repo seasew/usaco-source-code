@@ -141,8 +141,21 @@ int main()
 				// all indexes must be in bounds
 				if (newi >= 0 && newi < n && newj >= 0 && newj < n)
 				{
-					// 
-					if ()
+					// at least one position must be unvisited
+					if (!visited[i][j] || !visited[newi][newj])
+					{
+						// the two target values cannot be the same
+						if (grid[i][j] != grid[newi][newj])
+						{
+							dfs2(i, j, grid[i][j], grid[newi][newj]);
+
+							// cmp cursize to max2
+							max2 = std::max(max2, cursize);
+
+							// reset cursize
+							cursize = 0;
+						}
+					}
 				}
 			}
 		}
