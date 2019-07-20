@@ -25,6 +25,7 @@ int grid[250][250];
 // true if already visited by search
 bool visited[250][250];
 
+
 int max1;
 int max2;
 
@@ -61,6 +62,14 @@ void dfs(int i, int j, int target)
 		// call recursive dfs
 		dfs(i + deltai[a], j + deltaj[a], target);
 	}
+
+}
+
+// bool array should be false for first call, cursize should be 0
+// beginning call: dfs with target1
+// when t2 equals a nonzero value: dfs using both t1 and t2
+void dfs2(int i, int j, int t1, int t2)
+{
 
 }
 
@@ -109,6 +118,9 @@ int main()
 			}
 		}
 	}
+
+	// 2-team code
+	// iterate through grid 
 
 	// write to file
 	fout << max1 << "\n";
