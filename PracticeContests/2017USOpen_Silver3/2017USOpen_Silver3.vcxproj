@@ -115,6 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="multimoo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="multimoo.in" />
+    <None Include="multimoo.out" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
