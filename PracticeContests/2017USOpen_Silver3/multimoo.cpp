@@ -66,9 +66,34 @@ void dfs(int i, int j, int target)
 
 }
 
+// recursive search to find the size of the region at (i, j) with values of t1 and t2
 void dfs2(int i, int j, int t1, int t2)
 {
+	// basic checks
+	// i and j in bounds?
+	if (!(i >= 0 && i < n) || !(j >= 0 && j < n))
+	{
+		return;
+	}
+	// i and j match target value?
+	if (grid[i][j] != t1 && grid[i][j] != t2)
+	{
+		return;
+	}
+	// i and j already visited?
+	if (visited[i][j])
+	{
+		return;
+	}
 
+	visited[i][j] = true;
+	cursize++;
+
+	// check four directions
+	for (int a = 0; a < 4; a++)
+	{
+		dfs(i + deltai[a], j + deltaj[a], t1, t2);
+	}
 }
 
 int main()
