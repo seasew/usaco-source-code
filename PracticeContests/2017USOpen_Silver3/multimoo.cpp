@@ -124,6 +124,9 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
+			// clear the bool array
+			std::fill(std::begin(visited), std::end(visited), false);
+
 			// for each position, call dfs2 for (i,j) and each of the other 4 positions
 			for (int a = 0; a < 4; a++)
 			{
