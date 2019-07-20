@@ -55,6 +55,13 @@ void dfs(int i, int j, int target)
 	// update cursize
 	cursize++;
 
+	// check all four directions
+	for (int a = 0; a < 4; a++)
+	{
+		// call recursive dfs
+		dfs(i + deltai[a], j + deltaj[a], target);
+	}
+
 }
 
 int main()
