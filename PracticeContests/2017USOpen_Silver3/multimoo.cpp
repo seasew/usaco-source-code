@@ -111,7 +111,7 @@ int main()
 	}
 
 	// write to file
-	fin << max1 << "\n";
+	fout << max1 << "\n";
 
 	// Close Streams
 	fin.close();
