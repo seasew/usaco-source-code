@@ -121,7 +121,26 @@ int main()
 	
 
 	// 1-cow team code
+	int curID = 0;
 	// calls recursive method for every "no region" key
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			position pos = std::make_pair(i, j);
+			// if pos does not have a region yet
+			if (gridID.at(pos) < 0)
+			{
+				// create a new region in regions map
+				std::set<position> temp;
+				regions.insert(std::make_pair(curID, temp));
+
+				// call dfs
+				dfs(pos, grid[i][j], curID);
+				curID++;
+			}
+		}
+	}
 
 	// write to file
 	fout << max1 << "\n" << max2 << "\n";
