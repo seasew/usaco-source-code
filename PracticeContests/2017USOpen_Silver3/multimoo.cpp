@@ -41,12 +41,28 @@ std::map<std::pair<position, position>, bool> edges;
 
 // searches through grid for target values adjacent to position
 // updates cursize
-// changes edges map
 // updates regions
 // updates gridID
 void dfs(position pos, int target, int regionID)
 {
-	
+	int i = pos.first;
+	int j = pos.second;
+	// basic checks
+	// pos in bounds?
+	if (i < 0 || i >= n || j < 0 || j >= n)
+	{
+		return;
+	}
+	// position matches target?
+	if (grid[i][j] != target)
+	{
+		return;
+	}
+	// is the pos already part of a region? (this means it has been visited)
+	if (gridID.at(pos) >= 0)
+	{
+		return;
+	}
 }
 
 int main()
