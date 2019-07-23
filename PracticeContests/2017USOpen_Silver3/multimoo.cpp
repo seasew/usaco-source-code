@@ -87,12 +87,41 @@ int main()
 	{
 		for (int j = 0; j < n; j++)
 		{
+			// initialize grid array
 			fin >> grid[i][j];
+
+			// initalize gridID with all the possible (i, j) & regionID= -1
+			position p = std::make_pair(i, j);
+			gridID.insert(std::make_pair (p, -1));
+
+			// initalize edges with ((i, j)&down1&right1) & visited = false
+			// if last row, and not the very last one
+			if (i == n - 1 && j != n - 1)
+			{
+				// only initialize pair to the right
+				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i, j + 1)), false));
+			}
+			// if last column, but not the last row
+			else if (j == n - 1 && i != n - 1)
+			{
+				// only down pair
+				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i + 1, j)), false));
+			}
+			// everything else
+			else
+			{
+				// do both
+				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i, j + 1)), false));
+				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i + 1, j)), false));
+			}
+			
 		}
 	}
 
+	
+
 	// 1-cow team code
-	// calls recursive method
+	// calls recursive method for every "no region" key
 
 	// write to file
 	fout << max1 << "\n" << max2 << "\n";
