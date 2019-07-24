@@ -107,8 +107,8 @@ int main()
 				// only down pair
 				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i + 1, j)), false));
 			}
-			// everything else
-			else
+			// everything else excluding very last corner value
+			else if (!(i == n - 1 && j == n - 1))
 			{
 				// do both
 				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i, j + 1)), false));
