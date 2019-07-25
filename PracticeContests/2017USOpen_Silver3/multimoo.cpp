@@ -163,7 +163,7 @@ int main()
 	// for each region
 	for (int id = 0; id < curID; id++)
 	{
-		// call visitreg for all F
+		visitreg(id);
 	}
 
 	// write to file
