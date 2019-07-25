@@ -36,8 +36,8 @@ std::map<position, int> gridID;
 // key = the region ID; val = the positions in that region
 std::map<int, std::set<position>> regions;
 
-// key = two adjacent positions; val = if the edge between the two positions has been visited
-std::map<std::pair<position, position>, bool> edges;
+// key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
+std::map<int, std::pair<std::set<int>, bool>> graph;
 
 // searches through grid for target values adjacent to position
 // updates regions
@@ -106,27 +106,6 @@ int main()
 			// initalize gridID with all the possible (i, j) & regionID= -1
 			position p = std::make_pair(i, j);
 			gridID.insert(std::make_pair (p, -1));
-
-			// initalize edges with ((i, j)&down1&right1) & visited = false
-			// if last row, and not the very last one
-			if (i == n - 1 && j != n - 1)
-			{
-				// only initialize pair to the right
-				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i, j + 1)), false));
-			}
-			// if last column, but not the last row
-			else if (j == n - 1 && i != n - 1)
-			{
-				// only down pair
-				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i + 1, j)), false));
-			}
-			// everything else excluding very last corner value
-			else if (!(i == n - 1 && j == n - 1))
-			{
-				// do both
-				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i, j + 1)), false));
-				edges.insert(std::make_pair(std::make_pair(p, std::make_pair(i + 1, j)), false));
-			}
 			
 		}
 	}
@@ -158,14 +137,33 @@ int main()
 	}
 	
 	// 2-cow team code
-	// find unvisited edges to call dfs2
+	// create a graph with true-false edges between adjacent regions
+	// for each position/value
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
 			position pos = std::make_pair(i, j);
-			
+			int regID = gridID[pos];
+
+			// for each of the four directions
+			for (int a = 0; a < 4; a++)
+			{
+				position newpos = std::make_pair(i + deltai[a], j + deltaj[a]);
+				// if they have different regionIDs, add it to the adjacent set of values
+				if (regID != gridID[newpos])
+				{
+					// insert adj reg id
+					graph[regID].first.insert(gridID[newpos]);
+				}
+			}
 		}
+	}
+
+	// for each region
+	for (int id = 0; id < curID; id++)
+	{
+		// call visitreg for all F
 	}
 
 	// write to file
