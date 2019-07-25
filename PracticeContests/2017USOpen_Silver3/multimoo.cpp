@@ -131,8 +131,6 @@ int main()
 		}
 	}
 
-	
-
 	// 1-cow team code
 	int curID = 0;
 	// calls recursive method for every "no region" key
@@ -150,6 +148,10 @@ int main()
 
 				// call dfs
 				dfs(pos, grid[i][j], curID);
+				// cmp new region size with max1
+				int regsize = regions[curID].size();
+				max1 = std::max(max1, regsize);
+
 				curID++;
 			}
 		}
