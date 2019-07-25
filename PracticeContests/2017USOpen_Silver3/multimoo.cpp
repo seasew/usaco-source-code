@@ -63,9 +63,19 @@ void dfs(position pos, int target, int regionID)
 		return;
 	}
 	
-	// update maps and variables
+	// update maps
 	gridID[pos] = regionID;
 	regions[regionID].insert(pos);
+
+	// call for 4 directions
+	for (int a = 0; a < 4; a++)
+	{
+		int newi = i + deltai[a];
+		int newj = j + deltaj[a];
+
+		position newpos = std::make_pair(newi, newj);
+		dfs(newpos, target, regionID);
+	}
 }
 
 int main()
