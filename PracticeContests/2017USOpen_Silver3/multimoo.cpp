@@ -40,7 +40,6 @@ std::map<int, std::set<position>> regions;
 std::map<std::pair<position, position>, bool> edges;
 
 // searches through grid for target values adjacent to position
-// updates cursize
 // updates regions
 // updates gridID
 void dfs(position pos, int target, int regionID)
@@ -63,6 +62,10 @@ void dfs(position pos, int target, int regionID)
 	{
 		return;
 	}
+	
+	// update maps and variables
+	gridID[pos] = regionID;
+	regions[regionID].insert(pos);
 }
 
 int main()
@@ -133,7 +136,7 @@ int main()
 			{
 				// create a new region in regions map
 				std::set<position> temp;
-				regions.insert(std::make_pair(curID, temp));
+				regions.emplace(std::make_pair(curID, temp));
 
 				// call dfs
 				dfs(pos, grid[i][j], curID);
