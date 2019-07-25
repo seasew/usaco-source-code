@@ -156,6 +156,17 @@ int main()
 			}
 		}
 	}
+	
+	// 2-cow team code
+	// find unvisited edges to call dfs2
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			position pos = std::make_pair(i, j);
+			
+		}
+	}
 
 	// write to file
 	fout << max1 << "\n" << max2 << "\n";
