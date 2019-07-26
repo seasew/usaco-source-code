@@ -37,7 +37,12 @@ std::map<position, int> gridID;
 std::map<int, std::set<position>> regions;
 
 // key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
-std::map<int, std::pair<std::set<int>, bool>> graph;
+std::map<int, std::set<int>> graph;
+
+// edges of graph
+std::map<int, std::vector<bool>> edges;
+
+int cursize;
 
 // searches through grid for target values adjacent to position
 // updates regions
@@ -75,6 +80,21 @@ void dfs(position pos, int target, int regionID)
 
 		position newpos = std::make_pair(newi, newj);
 		dfs(newpos, target, regionID);
+	}
+}
+
+// visits regid and calls visitreg for all unvisited adjacent regions
+void visitreg(int regid)
+{
+	// for all adjacent regions (a is the adj region id)
+	for (int a = 0; a < graph[regid].size(); a++)
+	{
+		// if unvisited edge
+		if (!(edges[a].at(regid)))
+		{
+			// visit!
+			visitreg(a);
+		}
 	}
 }
 
@@ -154,7 +174,7 @@ int main()
 				if (regID != gridID[newpos])
 				{
 					// insert adj reg id
-					graph[regID].first.insert(gridID[newpos]);
+					graph[regID].insert(gridID[newpos]);
 				}
 			}
 		}
