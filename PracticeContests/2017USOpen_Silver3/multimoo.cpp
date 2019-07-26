@@ -170,8 +170,9 @@ int main()
 			for (int a = 0; a < 4; a++)
 			{
 				position newpos = std::make_pair(i + deltai[a], j + deltaj[a]);
+
 				// if they have different regionIDs, add it to the adjacent set of values
-				if (regID != gridID[newpos])
+				if (newpos.first >= 0 && newpos.first < n && newpos.second >= 0 && newpos.second < n && regID != gridID[newpos])
 				{
 					// insert adj reg id
 					graph[regID].insert(gridID[newpos]);
