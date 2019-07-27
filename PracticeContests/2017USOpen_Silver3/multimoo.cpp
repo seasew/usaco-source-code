@@ -39,7 +39,7 @@ std::map<int, std::pair<int, int>> regions;
 // key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
 std::map<int, std::set<int>> graph;
 
-// edges of graph
+// edges of graph (key = regid, val = 
 std::map<int, std::vector<bool>> edges;
 
 int cursize;
@@ -190,6 +190,8 @@ int main()
 				{
 					// insert adj reg id
 					graph[regID].insert(gridID[newpos]);
+					// update bool vector in edges as well (default val is false)
+					edges[regID].push_back(false);
 				}
 			}
 		}
