@@ -198,7 +198,18 @@ int main()
 	// for each region
 	for (int id = 0; id < curID; id++)
 	{
-		//visitreg(id);
+		int gridval = regions[id].second;
+		// for each of the adjacent edges
+		for (int adjreg : graph[id])
+		{
+			// call visitreg (id, id2, t1, t2) for all edges
+			cursize = 0;
+			visitreg(id, adjreg, gridval, regions[adjreg].second);
+
+			// cmp cursize with max2
+			max2 = std::max(max2, cursize);
+		}
+
 	}
 
 	// write to file
