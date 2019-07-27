@@ -33,15 +33,14 @@ int grid[250][250];
 // key = position (i, j); val = the region ID for that position
 std::map<position, int> gridID;
 
-// key = the region ID; val = the positions in that region
-std::map<int, int> regions;
+// key = the region ID; val = pair(region size, region value)
+std::map<int, std::pair<int, int>> regions;
 
 // key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
 std::map<int, std::set<int>> graph;
 
 // edges of graph
 std::map<int, std::vector<bool>> edges;
-
 
 int cursize;
 
@@ -71,7 +70,7 @@ void dfs(position pos, int target, int regionID)
 	
 	// update maps
 	gridID[pos] = regionID;
-	regions[regionID].insert(pos);
+	regions[regionID].first++;
 
 	// call for 4 directions
 	for (int a = 0; a < 4; a++)
@@ -85,11 +84,17 @@ void dfs(position pos, int target, int regionID)
 }
 
 // visits regid and calls visitreg for all unvisited adjacent regions
-void visitreg(int id1, int id2)
+void visitreg(int id1, int id2, int t1, int t2)
 {
 	// basic checks
 	// edge already visited?
 	if (edges[id1].at(id2))
+	{
+		return;
+	}
+
+	// does id2 match the targets
+	if (regions[id2].second == t1 && regions[id2].second == t2)
 	{
 		return;
 	}
@@ -99,8 +104,13 @@ void visitreg(int id1, int id2)
 	(edges[id2])[id1] = true;
 
 	// update cursize with id2's region size
-	cursize += 
+	cursize += regions[id2].first;
 	
+	// look for adjacent regions to id2
+	for (int newreg : graph[id2])
+	{
+		visitreg(id2, newreg, t1, t2);
+	}
 }
 
 int main()
@@ -146,13 +156,13 @@ int main()
 			// if pos does not have a region yet
 			if (gridID.at(pos) < 0)
 			{
-				// create a new region in regions map
-				regions.emplace(std::make_pair(curID, 0));
+				// create a new region in regions map (the pair at the end is 0=regionsize, grid[][]=gridvalue)
+				regions.emplace(std::make_pair(curID, std::make_pair(0, grid[pos.first][pos.second])));
 
 				// call dfs
 				dfs(pos, grid[i][j], curID);
 				// cmp new region size with max1
-				int regsize = regions[curID];
+				int regsize = regions[curID].first;
 				max1 = std::max(max1, regsize);
 
 				curID++;
