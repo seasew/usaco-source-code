@@ -204,8 +204,9 @@ int main()
 		// for each of the adjacent edges
 		for (int adjreg : graph[id])
 		{
+			// set to region1's region size
+			cursize = regions[id].first;
 			// call visitreg (id, id2, t1, t2) for all edges
-			cursize = 0;
 			visitreg(id, adjreg, gridval, regions[adjreg].second);
 
 			// cmp cursize with max2
