@@ -94,7 +94,7 @@ void visitreg(int id1, int id2, int t1, int t2)
 	}
 
 	// does id2 match the targets
-	if (regions[id2].second == t1 && regions[id2].second == t2)
+	if (regions[id2].second != t1 && regions[id2].second != t2)
 	{
 		return;
 	}
