@@ -34,13 +34,14 @@ int grid[250][250];
 std::map<position, int> gridID;
 
 // key = the region ID; val = the positions in that region
-std::map<int, std::set<position>> regions;
+std::map<int, int> regions;
 
 // key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
 std::map<int, std::set<int>> graph;
 
 // edges of graph
 std::map<int, std::vector<bool>> edges;
+
 
 int cursize;
 
@@ -84,18 +85,22 @@ void dfs(position pos, int target, int regionID)
 }
 
 // visits regid and calls visitreg for all unvisited adjacent regions
-void visitreg(int regid)
+void visitreg(int id1, int id2)
 {
-	// for all adjacent regions (a is the adj region id)
-	for (int a = 0; a < graph[regid].size(); a++)
+	// basic checks
+	// edge already visited?
+	if (edges[id1].at(id2))
 	{
-		// if unvisited edge
-		if (!(edges[a].at(regid)))
-		{
-			// visit!
-			visitreg(a);
-		}
+		return;
 	}
+
+	// update the edge
+	(edges[id1])[id2] = true;
+	(edges[id2])[id1] = true;
+
+	// update cursize with id2's region size
+	cursize += 
+	
 }
 
 int main()
@@ -142,13 +147,12 @@ int main()
 			if (gridID.at(pos) < 0)
 			{
 				// create a new region in regions map
-				std::set<position> temp;
-				regions.emplace(std::make_pair(curID, temp));
+				regions.emplace(std::make_pair(curID, 0));
 
 				// call dfs
 				dfs(pos, grid[i][j], curID);
 				// cmp new region size with max1
-				int regsize = regions[curID].size();
+				int regsize = regions[curID];
 				max1 = std::max(max1, regsize);
 
 				curID++;
@@ -184,7 +188,7 @@ int main()
 	// for each region
 	for (int id = 0; id < curID; id++)
 	{
-		visitreg(id);
+		//visitreg(id);
 	}
 
 	// write to file
