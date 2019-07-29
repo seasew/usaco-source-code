@@ -217,8 +217,8 @@ int main()
 		// for each of the adjacent edges
 		for (int adjreg : graph[id])
 		{
-			// set to region1's region size
-			cursize = regions[id].first;
+			// reset cursize for the next visitreg call
+			cursize = 0;
 			// call visitreg (id, t1, t2) for all edges
 			visitreg(id, gridval, regions[adjreg].second);
 
