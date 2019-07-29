@@ -28,7 +28,7 @@ int max1;
 int max2;
 
 // 2d array with the original values of the grid
-int grid[250][250];
+int grid[300][300];
 
 // key = position (i, j); val = the region ID for that position
 std::map<position, int> gridID;
@@ -39,8 +39,8 @@ std::map<int, std::pair<int, int>> regions;
 // key = regID, val = .first: set of adjacent reg IDs, .second: bool if visited
 std::map<int, std::set<int>> graph;
 
-// edges of graph (key = regid, val = 
-std::map<int, std::vector<bool>> edges;
+// edges of graph (key = regid, val = map (adj id, true/false))
+std::map<int, std::map<int, bool>> edges;
 
 int cursize;
 
@@ -190,24 +190,11 @@ int main()
 				{
 					// insert adj reg id
 					graph[regID].insert(gridID[newpos]);
+					// insert this adjacent region id into edges
+					(edges[regID]).insert(std::make_pair(gridID[newpos], false));
 				}
 			}
 		}
-	}
-
-	// initalize edges
-	// for each region
-	for (int id = 0; id < curID; id++)
-	{
-
-		std::vector<bool> temp;
-		// initalize a vector with size (#ofreg)
-		for (int id2 = 0; id2 < curID; id2++)
-		{
-			temp.push_back(false);
-		}
-
-		edges[id] = temp;
 	}
 
 	// for each region
