@@ -83,33 +83,33 @@ void dfs(position pos, int target, int regionID)
 	}
 }
 
+
 // visits regid and calls visitreg for all unvisited adjacent regions
-void visitreg(int id1, int id2, int t1, int t2)
+void visitreg(int id1, int t1, int t2)
 {
-	// basic checks
-	// edge already visited?
-	if (edges[id1].at(id2))
-	{
-		return;
-	}
-
-	// does id2 match the targets
-	if (regions[id2].second != t1 && regions[id2].second != t2)
-	{
-		return;
-	}
-
-	// update the edge
-	(edges[id1])[id2] = true;
-	(edges[id2])[id1] = true;
-
 	// update cursize with id2's region size
-	cursize += regions[id2].first;
+	cursize += regions[id1].first;
 	
-	// look for adjacent regions to id2
-	for (int newreg : graph[id2])
+	// look for adjacent regions to id1
+	for (int id2 : graph[id1])
 	{
-		visitreg(id2, newreg, t1, t2);
+		if (edges[id1].at(id2))
+		{
+			// has to be unvisited edge
+		}
+		else if (regions[id2].second != t1 && regions[id2].second != t2)
+		{
+			// has to match one of the target values
+		}
+		else
+		{
+			// update the edge because it passed all the checks
+			(edges[id1])[id2] = true;
+			(edges[id2])[id1] = true;
+
+			// visit id2 region
+			visitreg(id2, t1, t2);
+		}
 	}
 }
 
@@ -190,11 +190,24 @@ int main()
 				{
 					// insert adj reg id
 					graph[regID].insert(gridID[newpos]);
-					// update bool vector in edges as well (default val is false)
-					edges[regID].push_back(false);
 				}
 			}
 		}
+	}
+
+	// initalize edges
+	// for each region
+	for (int id = 0; id < curID; id++)
+	{
+
+		std::vector<bool> temp;
+		// initalize a vector with size (#ofreg)
+		for (int id2 = 0; id2 < curID; id2++)
+		{
+			temp.push_back(false);
+		}
+
+		edges[id] = temp;
 	}
 
 	// for each region
