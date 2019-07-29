@@ -219,8 +219,8 @@ int main()
 		{
 			// set to region1's region size
 			cursize = regions[id].first;
-			// call visitreg (id, id2, t1, t2) for all edges
-			visitreg(id, adjreg, gridval, regions[adjreg].second);
+			// call visitreg (id, t1, t2) for all edges
+			visitreg(id, gridval, regions[adjreg].second);
 
 			// cmp cursize with max2
 			max2 = std::max(max2, cursize);
