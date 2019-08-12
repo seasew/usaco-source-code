@@ -54,6 +54,21 @@ int main()
 	std::sort(std::begin(xmeters), std::end(xmeters), cmpxmRS);
 	std::sort(std::begin(ctastiness), std::end(ctastiness));
 
+	// 'walk through' ctastiness array 
+	int prevI = 0;
+	int t = (xmeters[prevI]) * (rf - rb) * (ctastiness[prevI]);
+	for (int i = 1; i < n; i++)
+	{
+		// if the next tastiest RS is after the prev RS
+		if (xmeters[i] > xmeters[prevI])
+		{
+			// this is Bessie's next rest stop
+			t += (xmeters[i] - xmeters[prevI]) * (rf - rb) * (ctastiness[i]);
+		}
+
+		// otherwise, continue searching for a RS
+	}
+
 	// close streams
 	fin.close();
 	fout.close();
