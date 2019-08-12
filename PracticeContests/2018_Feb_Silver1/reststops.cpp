@@ -64,6 +64,8 @@ int main()
 		{
 			// this is Bessie's next rest stop
 			t += (xmeters[i] - xmeters[prevI]) * (rf - rb) * (ctastiness[i]);
+			// update prevI
+			prevI = i;
 		}
 
 		// otherwise, continue searching for a RS
