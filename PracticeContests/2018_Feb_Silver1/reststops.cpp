@@ -51,8 +51,8 @@ int main()
 	}
 
 	// sort by tastiness
-	std::sort(std::begin(xmeters), std::end(xmeters), cmpxmRS);
-	std::sort(std::begin(ctastiness), std::end(ctastiness));
+	std::sort(std::begin(xmeters), std::begin(xmeters) + n, cmpxmRS);
+	std::sort(std::begin(ctastiness), std::begin(ctastiness) + n);
 
 	// 'walk through' ctastiness array 
 	int prevI = 0;
