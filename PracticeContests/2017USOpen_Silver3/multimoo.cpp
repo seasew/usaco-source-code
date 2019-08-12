@@ -44,9 +44,6 @@ std::map<int, std::map<int, bool>> edges;
 
 int cursize;
 
-std::vector<int> max2reg;
-std::vector<int> temp;
-
 // searches through grid for target values adjacent to position
 // updates regions
 // updates gridID
@@ -112,8 +109,6 @@ void visitreg(int id1, int t1, int t2)
 
 			// visit id2 region
 			visitreg(id2, t1, t2);
-
-			temp.push_back(id2);
 		}
 	}
 }
@@ -216,40 +211,12 @@ int main()
 
 			// cmp cursize with max2
 			max2 = std::max(max2, cursize);
-
-			temp.push_back(id);
-
-			if (cursize >= max2)
-			{
-				max2reg = temp;
-			}
-			temp.clear();
 		}
 
 	}
 
 	// write to file
 	fout << max1 << "\n" << max2 << "\n";
-
-	// print out the regions that make up the 2-team
-	for (int regid : max2reg)
-	{
-		// regid & the value associated with the region
-		fout << regid << "(" << regions[regid].second << ") ";
-	}
-	fout << "\n";
-
-	// print out the gridid 
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			position p = std::make_pair(i, j);
-			int id = gridID[p];
-			fout << gridID[p] << " ";
-		}
-		fout << "\n";
-	}
 
 	// Close Streams
 	fin.close();
