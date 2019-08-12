@@ -69,6 +69,8 @@ int main()
 		// otherwise, continue searching for a RS
 	}
 
+	fout << t << "\n";
+
 	// close streams
 	fin.close();
 	fout.close();
