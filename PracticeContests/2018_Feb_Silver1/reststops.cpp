@@ -24,7 +24,7 @@ int ctastiness[1000000];
 // sort xmeters arr by their tastiness values
 bool cmpxmRS(const int xm1, const int xm2)
 {
-	return ctastiness[xm1] < ctastiness[xm2];
+	return ctastiness[xm1] > ctastiness[xm2];
 }
 
 int main()
@@ -52,7 +52,7 @@ int main()
 
 	// sort by tastiness
 	std::sort(std::begin(xmeters), std::begin(xmeters) + n, cmpxmRS);
-	std::sort(std::begin(ctastiness), std::begin(ctastiness) + n);
+	std::sort(std::begin(ctastiness), std::begin(ctastiness) + n, std::greater<int>());
 
 	// 'walk through' ctastiness array 
 	int prevI = 0;
