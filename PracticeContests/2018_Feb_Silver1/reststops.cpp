@@ -18,6 +18,8 @@ int l;
 int n;
 int rf;
 int rb;
+int origxmeters[1000000];
+int origctastiness[1000000];
 int xmeters[1000000];
 int ctastiness[1000000];
 
@@ -47,7 +49,13 @@ int main()
 	fin >> l >> n >> rf >> rb;
 	for (int i = 0; i < n; i++)
 	{
-		fin >> xmeters[i] >> ctastiness[i];
+		int a, b;
+		fin >> a >> b;
+		ctastiness[i] = b;
+		xmeters[i] = a;
+
+		origctastiness[i] = b;
+		origxmeters[i] = a;
 	}
 
 	// sort by tastiness
