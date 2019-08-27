@@ -18,16 +18,23 @@ int l;
 int n;
 int rf;
 int rb;
-int origxmeters[1000000];
-int origctastiness[1000000];
-int xmeters[1000000];
-int ctastiness[1000000];
+
+
+struct rs
+{
+	int meters;
+	int tastiness;
+};
+
+
+rs reststops[1000000];
 
 // sort xmeters arr by their tastiness values
-bool cmpxmRS(const int xm1, const int xm2)
+bool compareRS(rs rs1, rs rs2)
 {
-	return ctastiness[xm1] > ctastiness[xm2];
+	return rs1.tastiness > rs2.tastiness;
 }
+
 
 int main()
 {
@@ -51,27 +58,23 @@ int main()
 	{
 		int a, b;
 		fin >> a >> b;
-		ctastiness[i] = b;
-		xmeters[i] = a;
-
-		origctastiness[i] = b;
-		origxmeters[i] = a;
+		rs newrs = { a, b };
+		reststops[i] = newrs;
 	}
 
 	// sort by tastiness
-	std::sort(std::begin(xmeters), std::begin(xmeters) + n, cmpxmRS);
-	std::sort(std::begin(ctastiness), std::begin(ctastiness) + n, std::greater<int>());
+	std::sort(std::begin(reststops), std::begin(reststops) + n, compareRS);
 
-	// 'walk through' ctastiness array 
+	// 'walk through' orig array 
 	int prevI = 0;
-	int t = (xmeters[prevI]) * (rf - rb) * (ctastiness[prevI]);
+	int t = (reststops[prevI].meters) * (rf - rb) * (reststops[prevI].tastiness);
 	for (int i = 1; i < n; i++)
 	{
 		// if the next tastiest RS is after the prev RS
-		if (xmeters[i] > xmeters[prevI])
+		if (reststops[i].meters > reststops[prevI].meters)
 		{
 			// this is Bessie's next rest stop
-			t += (xmeters[i] - xmeters[prevI]) * (rf - rb) * (ctastiness[i]);
+			t += (reststops[i].meters - reststops[prevI].meters) * (rf - rb) * (reststops[i].tastiness);
 			// update prevI
 			prevI = i;
 		}
