@@ -82,7 +82,7 @@ int main()
 		// otherwise, continue searching for a RS
 	}
 
-	fout << t << "\n";
+	fout << t - 1 << "\n";
 
 	// close streams
 	fin.close();
